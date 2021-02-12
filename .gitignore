@@ -5,11 +5,7 @@ node_modules
 npm-debug.log
 
 # Environment Variables should NEVER be published
-<<<<<<< HEAD
-.env
-=======
 .env
 
 # Hide them
 
->>>>>>> a2a8cdcee0d7ebb39dc4dbdb8473cb8c4fbee85f
