@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose
-  .connect('mongodb://localhost/module2-week3', {
+  .connect('mongodb://localhost/wine-cellar', {
   useNewUrlParser: true, 
   useCreateIndex: true,
   useUnifiedTopology: true
