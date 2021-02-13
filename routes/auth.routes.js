@@ -1,10 +1,10 @@
 const express = require('express');
 const router  = express.Router();
-//const User = require('../models/User.model');
+const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
-const {email, options} = require('../configs/nodemailer.config');
+const {mailModule, mailOptions} = require('../configs/nodemailer.config');
 
-router.get('/signup', (req, res) => {
+router.get('/signup', (_req, res) => {
     res.render('auth/signup');
 });
 
@@ -44,9 +44,9 @@ router.post('/signup', async (req, res) => {
           password: hashPass
       });
 
-    options.to = email; //user email
+    mailOptions.to = email; //user email
     // send mail with defined transport object
-    email.sendMail(options, function(error, info){
+    mailModule.sendMail(mailOptions, function(error, info){
         if(error){
             return console.log(error);
         }
