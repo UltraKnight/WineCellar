@@ -2,7 +2,8 @@ const express = require('express');
 const router  = express.Router();
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
-const {mailModule, mailOptions} = require('../configs/nodemailer.config');
+const {gmail /*outlook*/, mailOptions} = require('../configs/nodemailer.config'); //choose between gmail or outlook
+mailOptions.from = 'WINE CELLAR <vandi.martins94@gmail.com>'; //change sender email here
 
 router.get('/signup', (_req, res) => {
     res.render('auth/signup');
@@ -46,7 +47,7 @@ router.post('/signup', async (req, res) => {
 
     mailOptions.to = email; //user email
     // send mail with defined transport object
-    mailModule.sendMail(mailOptions, function(error, info){
+    gmail.sendMail(mailOptions, function(error, info){
         if(error){
             return console.log(error);
         }
