@@ -1,27 +1,32 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="col-md-4 offset-4">
+    <h1>{{title}}</h1>
+    <p>Welcome to {{title}}</p>
 
-<!-- The sign up page for the user -->
+    <!-- The sign up page for the user -->
 
-<form action='/signup' method="POST">
+    <form action='/signup' method="POST">
+        <div>
+            <label class="form-label" for="username">Username</label>
+            <input class="form-control" type="text" name="username" id="username" placeholder="Insert username here" required>
+        </div>
 
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" placeholder="Insert username here" required>
+        <div>
+            <label class="form-label" for="email">Email</label>
+            <input class="form-control" type="email" name="email" id="email" placeholder="Your email">
+        </div>
 
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" placeholder="Your email">
+        <div class="mb-3">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder="Your password" required>
+        </div>
 
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" placeholder="Your password" required>
+        <button class="btn btn-danger" type="submit">Create Account</button>
 
-    <button type="submit">Create Account</button>
-
-
-    {{#if errorMessage}}
-    <div>
-    {{errorMessage}}
-    </div>
-    {{/if}}
-
-
-</form>
+        {{#if errorMessage}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{errorMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {{/if}}
+    </form>
+</div>
