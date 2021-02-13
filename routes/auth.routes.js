@@ -25,7 +25,7 @@ router.post('/signup', async (req, res) => {
       return;
   }
 
-  const user = await User.findOne({username: username});
+  const user = await User.findOne({username});
   if(user) {
       res.render('auth/signup', {errorMessage: 'Unfortunatly someone already has your username :('});
 
@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    const user = await User.findOne({username: username});
+    const user = await User.findOne({username});
     if(!user) {
         res.render('auth/login', {errorMessage: 'Invalid username and password combination'});
 

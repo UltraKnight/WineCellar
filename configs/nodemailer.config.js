@@ -25,4 +25,4 @@ let mailOptions = {
   //html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // html body
 };
 
-module.exports = {email: transporter, options: mailOptions};
+module.exports = {mailModule: transporter, mailOptions};
