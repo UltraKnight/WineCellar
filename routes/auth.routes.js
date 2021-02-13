@@ -65,14 +65,14 @@ router.post('/login', async (req, res) => {
     const {username, password} = req.body;
 
     if (!username || !password) {
-        res.render('auth/login', {errorMessage: 'Please fill both fields: username and password'});
+        res.render('index', {errorMessage: 'Please fill both fields: username and password'});
 
         return;
     }
 
     const user = await User.findOne({username});
     if(!user) {
-        res.render('auth/login', {errorMessage: 'Invalid username and password combination'});
+        res.render('index', {errorMessage: 'Invalid username and password combination'});
 
         return;
     }
@@ -81,7 +81,7 @@ router.post('/login', async (req, res) => {
         req.session.currentUser = user;
         res.redirect('/');
     } else {
-        res.render('auth/login', {errorMessage: 'Invalid login'});
+        res.render('index', {errorMessage: 'Invalid username and password combination'});
     }
 });
 
