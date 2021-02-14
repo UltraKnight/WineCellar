@@ -1,33 +1,35 @@
-<div class="col-md-4 offset-4">
-  <div class="text-center">
-    <h1>{{title}}</h1>
-    <p>Welcome to {{title}}</p>
-  </div>
-
-  {{#unless user}}
-    <h2>Login</h2>
-
-    <form action="/login" method="POST">
-      <div class="mb-3">
-        <label class="form-label" for="username">Username</label>
-        <input class="form-control" type="text" name="username" id="username" required>
-      </div>
-        
-      <div class="mb-3">
-        <label class="form-label" for="password">Password</label>
-        <input class="form-control" type="password" name="password" id="password" required>
-      </div>
-
-      <button type="submit" class="btn btn-danger">Log In</button>
-      <span class="float-end">Don't have an account? Sign up <a href="/signup">here</a></span>
-    </form>
-  {{/unless}}
-
-  {{#if errorMessage}}
-    {{!-- <div>{{errorMessage}}</div> --}}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{errorMessage}}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="container-fluid container-login">
+  <div class="col-md-4 offset-md-4 text-light">
+    <div class="text-center">
+      <h1>{{title}}</h1>
+      <p>Welcome to {{title}}</p>
     </div>
-  {{/if}}
+
+    {{#unless user}}
+      <h2>Login</h2>
+
+      <form action="/login" method="POST">
+        <div class="mb-3">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-control" type="text" name="username" id="username" required>
+        </div>
+          
+        <div class="mb-3">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" type="password" name="password" id="password" required>
+        </div>
+
+        <button type="submit" class="btn btn-danger">Log In</button>
+        <span class="float-end">Don't have an account? Sign up <a href="/signup">here</a></span>
+      </form>
+    {{/unless}}
+
+    {{#if errorMessage}}
+      {{!-- <div>{{errorMessage}}</div> --}}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{errorMessage}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {{/if}}
+  </div>
 </div>

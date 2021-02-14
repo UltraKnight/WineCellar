@@ -1,8 +1,23 @@
 body {
-  padding: 50px;
+  padding-top: 50px;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.container-login {
+  height: 93vh;
+  background-image: url('/images/wines_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: center;
+}
+
+@media only screen and (max-width: 767px) {
+  body {
+    padding-top: 57px;
+  }
 }
