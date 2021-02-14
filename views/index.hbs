@@ -2,7 +2,7 @@
   <div class="col-md-4 offset-md-4 text-light">
     <div class="text-center">
       <h1>{{title}}</h1>
-      <p>Welcome to {{title}}</p>
+      <h5 class="title">Welcome to {{title}}</h5>
     </div>
 
     {{#unless user}}
@@ -20,7 +20,7 @@
         </div>
 
         <button type="submit" class="btn btn-danger">Log In</button>
-        <span class="float-end">Don't have an account? Sign up <a href="/signup">here</a></span>
+        <span class="float-end">Don't have an account? Sign up <a href="/signup" class="link-info">here</a></span>
       </form>
     {{/unless}}
 
