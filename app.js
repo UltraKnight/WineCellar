@@ -67,4 +67,12 @@ app.use('/', index);
 const auth = require('./routes/auth.routes');
 app.use('/', auth);
 
+ const cellar = require('./routes/cellars.routes');
+ app.use('/', cellar);
+
+// const wines = require('./routes/wines.routes');
+// app.use('/', wines);
+
+
+
 module.exports = app;
