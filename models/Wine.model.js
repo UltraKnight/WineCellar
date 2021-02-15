@@ -5,7 +5,10 @@ const wineSchema = new Schema ({
     name: String,
     country: String,
     year: Number,
-    annotations: String,
+    annotations:{
+        type: String,
+        trim: true
+    }, 
     type: {
         type: String,
         enum: [ 'red', 'white', 'rose', 'sparkling', 'dessert', 'green' ]
