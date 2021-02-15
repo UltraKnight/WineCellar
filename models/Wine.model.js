@@ -6,13 +6,14 @@ const wineSchema = new Schema ({
     country: String,
     year: Number,
     annotations: String,
-    type: [ 'red', 'white', 'rose', 'sparkling', 'dessert', 'green' ],
-    blend: String, //add % on the input
-    alcoholicPercentage: Number,
-    grapes: String,
-    abv: String, //check the type
-    drinkUntil: Number, //or String? 
-    bottleSize: String, //it has numbers and letters
+    type: {
+        type: String,
+        enum: [ 'red', 'white', 'rose', 'sparkling', 'dessert', 'green' ]
+    },
+    blend: String, 
+    abv: Number, 
+    drinkUntil: Date,
+    bottleSize: Number,
     closure: String
 });
 
