@@ -1,3 +1,15 @@
-<h1>Wine List of This Cellar</h1>  <!-- change to {{cellar.id}} to have the name of the cellar on the page -->
+<h1>Wine List {{cellar.id}}</h1>  <!-- change to {{cellar.id}} to have the name of the cellar on the page -->
 <hr>
 
+<!-- só cellar cellar.wines.name{{wines.id}} -->
+
+{{#each cellar.wines}}
+    <h3>name</h3>
+    <h3>country</h3>
+    <h3>year</h3>
+    <h3>annotation</h3>
+    <h3></h3>
+
+
+
+{{/each}}
