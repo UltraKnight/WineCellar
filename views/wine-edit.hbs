@@ -1,44 +1,38 @@
 <h1>Wine Edit</h1>
 
+<form action="/cellars/{{cellar.id}}/wines/{{wine.id}}" method="POST">
 
-<a href="/cellars/{{cellar.id}}/wines/{{wine.id}}">My wine</a> 
+    <label>Name:</label>
+        <input type="text" name="name" value="{{wine.name}}">
 
-<form action="/wine/{{wine.id}}/edit" method="POST">
+    <label>Country:</label>
+        <input type="text" name="country" value="{{wine.country}}"> <!-- use the API -->
 
-<label>Name:</label>
-    <input type="text" name="name" value="{{wine.name}}">
+    <label>Year:</label>
+        <input type="number" name="year" value="{{wine.year}}">
 
-<label>Country:</label>
-    <input type="text" name="country" value="{{wine.country}}"> <!-- use the API -->
+    <label>Annotations:</label>
+        <textarea name="annotations" cols="30" row="4"> 
+            {{wine.annotation}}
+        </textarea>
 
-<label>Year:</label>
-    <input type="number" name="year" value="{{wine.year}}">
+    <label>Type:</label>
+        <input type="text" name="type" value="{{wine.type}}"> <!-- check this one-->
 
-<label>Annotations:</label>
-    <textarea name="annotations" cols="30" row="4"> 
-        {{wine.annotation}}
-    </textarea>
+    <label>Blend/Grape Mix:</label>
+        <input type="text" name="blend" value="{{wine.blend}}">
 
-<label>Type:</label>
-    <input type=" " name="type" value="{{wine.type}}"> <!-- check this one-->
+    <label>Alcohol By Volume:</label>
+        <input type="number" name="abv" value="{{wine.abv}}">
 
-<label>Blend/Grape Mix:</label>
-    <input type="text" name="blend" value="{{wine.blend}}">
+    <label>Expiration Date:</label>
+        <input type="date" name="drinkUntil" value="{{wine.drinkUntil}}">
 
-<label>Alcohol By Volume:</label>
-    <input type="number" name="abv" value="{{wine.abv}}">
+    <label>Bottle Size:</label>
+        <input type="number" name="bottleSize" value="{{wine.bottleSize}}">
 
-<label>Expiration Date:</label>
-    <input type="date" name="drinkUntil" value="{{wine.drinkUntil}}">
+    <label>Closure:</label>
+        <input type="text" name="closure" value="{{wine.closure}}">
 
-<label>Bottle Size:</label>
-    <input type="number" name="bottleSize" value="{{wine.bottleSize}}">
-
-<label>Closure:</label>
-    <input type="text" name="closure" value="{{wine.closure}}">
-
-<button type="submit">Edit Wine</button> 
-
-<button type="submit">Delete</button>
-
+    <button type="submit">Edit Wine</button> 
 </form>
