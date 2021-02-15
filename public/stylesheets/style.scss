@@ -8,16 +8,31 @@ a {
   color: #00B7FF;
 }
 
-.container-login {
+.container-login, .container-cellar {
   height: 93vh;
-  background-image: url('/images/wines_bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
 }
 
+.container-login {
+  background-image: url('/images/wines_bg.jpg');
+}
+
+.container-cellar {
+  color: white;
+  background-image: url('/images/wine_cellar.jpg');
+}
+
 .title {
   text-shadow: 1px 1px 2px black;
+}
+
+.cellars {
+  background-color:rgba(0, 0, 0, 0.3);
+  a {
+    text-decoration: none;
+  }
 }
 
 #app-name {
