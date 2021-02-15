@@ -12,7 +12,7 @@ const requireLogin = require('../configs/access-control.config');
 router.get('/cellars', requireLogin, async (_req, res, next) => {
   try {
     let cellars = await Cellar.find();
-    res.render('cellars/index', {cellars});
+    res.render('cellars-list', {cellars});
   } catch (error) {
     next();
     return error;
@@ -21,7 +21,7 @@ router.get('/cellars', requireLogin, async (_req, res, next) => {
 
 //create form
 router.get('/cellars/create', requireLogin, async (_req, res) => {
-  res.render('cellars/create');
+  res.render('cellars-create');
 });
 
 //create new cellar
@@ -35,9 +35,9 @@ router.post('/cellars', requireLogin, async (req, res) => {
       wines: [],
       capacity
     });
-    res.rendirect('/cellars');
+    res.redirect('/cellars');
   } catch (error) {
-    res.render('cellars/create');
+    res.render('cellars-create');
   }
 });
 
@@ -57,7 +57,7 @@ router.post('/cellars/:id/delete', requireLogin, async (req, res, next) => {
 router.get('/cellars/:id/edit', requireLogin, async (req, res, next) => {
   try {
     let cellar = await Cellar.findById(req.params.id);
-    res.render('/cellars/update', {cellar});
+    res.render('cellars-edit', {cellar});
   } catch (error) {
     next();
     return error;
@@ -81,7 +81,7 @@ router.get('/cellars/:id', requireLogin, async (req, res, next) => {
   let id = req.params.id;
   try {
       let cellar = await Cellar.findById(id).populate('wines');
-      res.render('cellars/details', {cellar});
+      res.render('cellars-details', {cellar});
   } catch (error) {
     res.render('index', {errorMessage: 'The page you tried to access is not working right now, git it a time!'});
     return error;
