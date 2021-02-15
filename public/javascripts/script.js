@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.onload = () => {
   const appNameElem = document.getElementById('app-name');
-  appNameElem.classList.add('big-text');
-
+  if(appNameElem) {
+    appNameElem.classList.add('big-text');
+  }
 
   const updateScroll = () => {
     if(window.scrollY <= 10) {
