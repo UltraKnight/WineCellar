@@ -13,7 +13,7 @@ const countryList = require('country-list');
 router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
   try {
     //Get current cellar
-    let cellar = await Cellar.findById(req.params.cellarId).populate();
+    let cellar = await Cellar.findById(req.params.cellarId).populate('wines');
     //Get wines that are in this cellar
     res.render('wines-list', {cellar});
   } catch (error) {
