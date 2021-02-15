@@ -16,4 +16,4 @@ const wineSchema = new Schema ({
     closure: String
 });
 
-module.exports = model('Wine', wineSchema); 
+module.exports = model('Wine', wineSchema);
