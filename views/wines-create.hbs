@@ -1,0 +1,41 @@
+<!-- /cellars/:cellarId/wines/:wineId -->
+<h1>Create A Wine</h1>
+
+<form action="/cellars/{{cellar.id}}/wines/{{wine.id}}" method="POST">
+
+<label>Name:</label>
+        <input type="text" name="name" value="{{wine.name}}">
+
+ <label>Country:</label>
+        
+
+
+<label>Year:</label>
+        <input type="number" name="year" value="{{wine.year}}">
+
+    <label>Annotations:</label>
+        <textarea name="annotations" cols="30" row="4"> 
+            {{wine.annotation}}
+        </textarea>
+
+    <label>Type:</label>
+        <input type="text" name="type" value="{{wine.type}}">
+    
+    <label>Blend/Grape Mix:</label>
+        <input type="text" name="blend" value="{{wine.blend}}">
+
+    <label>Alcohol By Volume:</label>
+        <input type="number" name="abv" value="{{wine.abv}}">
+
+    <label>Expiration Date:</label>
+        <input type="date" name="drinkUntil" value="{{wine.drinkUntil}}">
+
+    <label>Bottle Size:</label>
+        <input type="number" name="bottleSize" value="{{wine.bottleSize}}">
+
+    <label>Closure:</label>
+        <input type="text" name="closure" value="{{wine.closure}}">
+
+    <button type="submit">Create Wine</button> 
+
+</form>
