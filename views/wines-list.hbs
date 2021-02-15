@@ -8,7 +8,7 @@
 {{#each cellar.wines}}  <!-- to have access to all the wines -->
 
 <div>
-    <a href="/cellars/{{cellarId}}/wines">{{name}}</a> <!-- to show the name of wine -->
+    <a href="/cellars/{{../cellar.id}}/wines/{{id}}">{{name}}</a> <!-- to show the name of wine -->
 
    <!-- <a href="/cellars/:cellarId/wines/:wineId">See More</a> --> <!-- To go to details page of each -->
 

@@ -26,6 +26,9 @@ a {
   display: inline-block;
   min-width: 250px; }
 
+li {
+  list-style: none; }
+
 @media only screen and (max-width: 767px) {
   body {
     padding-top: 57px; } }

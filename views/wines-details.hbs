@@ -5,24 +5,25 @@
         <div class="col-md-6">
           <div class="card border-0">
               <div class="card-body">
-                  <h5 class="card-title">{{wine.name}}</h5>
-                  <p class="card-text"><small class="text-muted">{{wine.country}}</small></p>
-                  <p class="card-text"><small class="text-muted">{{wine.year}}</small></p>
-                  <p class="car-text">{{wine.type}}</p>
-                  <p class="card-text">{{wine.annotations}}</p>
+                  <h2 class="card-title">{{wine.name}}</h2>
+                  <p class="card-text"><small class="text-muted">Country: {{wine.country}}</small></p>
+                  <p class="card-text"><small class="text-muted">Year: {{wine.year}}</small></p>
+                  <p class="car-text">Type: {{wine.type}}</p>
+                  <p class="card-text">Annotations: {{wine.annotations}}</p>
+
+                  <a href="/cellars/{{cellarId}}/wines">Back</a>
               </div>
           </div>
         </div>
-        <div class="col-md-6 pt-5">
+        <div class="col-md-6 mt-4">
             <h4>More Info</h4>
             <ul>
                 <li>ABV: {{wine.abv}}%</li>
                 <li>Drink until: {{wine.drinkUntil}}</li>
                 <li>bottleSize: {{wine.bottleSize}}</li>
                 <li>closure: {{wine.closure}}</li>
+                <li>Blend / Grapes Used: {{wine.blend}}</li>
             </ul>
-            <h4>Blend / Grapes Used</h4>
-            <p>{{wine.blend}}</p>
         </div>
     </div>
 </div>
