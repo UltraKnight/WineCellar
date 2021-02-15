@@ -7,7 +7,14 @@
         <input type="text" name="name" value="{{wine.name}}">
 
  <label>Country:</label>
-        
+        <select class="selectpicker" name="country" data-live-search="true">
+            {{#each countryList}}
+
+               <option value="{{this}}">{{this}}</option> 
+
+            {{/each}}
+
+        </select>
 
 
 <label>Year:</label>
