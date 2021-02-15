@@ -1,9 +1,11 @@
 <h1>{{cellar.name}}</h1>
 <hr>
 
-<p>Wine name: {{cellar.wines}}</p>
+<h3>Wines in this cellar</h3>
+<ul>
+  {{#each cellar.wines}}
+    <li>Wine name: {{name}}</li>
+  {{/each}}
+</ul>
 <p>This wine is placed at: {{cellar.place}}</p>
-<p>Details about this bottle: {{ cellar.wines }}</p>
-
-
-<button onclick="delete()">Delete</button>
+<p>This cellar capacity is: {{cellar.capacity}}</p>

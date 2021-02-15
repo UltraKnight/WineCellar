@@ -1,0 +1,28 @@
+{{!-- wine data -> name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure --}}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-6">
+          <div class="card border-0">
+              <div class="card-body">
+                  <h5 class="card-title">{{wine.name}}</h5>
+                  <p class="card-text"><small class="text-muted">{{wine.country}}</small></p>
+                  <p class="card-text"><small class="text-muted">{{wine.year}}</small></p>
+                  <p class="car-text">{{wine.type}}</p>
+                  <p class="card-text">{{wine.annotations}}</p>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6 pt-5">
+            <h4>More Info</h4>
+            <ul>
+                <li>ABV: {{wine.abv}}%</li>
+                <li>Drink until: {{wine.drinkUntil}}</li>
+                <li>bottleSize: {{wine.bottleSize}}</li>
+                <li>closure: {{wine.closure}}</li>
+            </ul>
+            <h4>Blend / Grapes Used</h4>
+            <p>{{wine.blend}}</p>
+        </div>
+    </div>
+</div>
