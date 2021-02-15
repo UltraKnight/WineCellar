@@ -79,7 +79,6 @@ router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, re
     let wine = await Wine.findById(req.params.wineId);
     res.render('wines-edit', {wine, cellar, countryList: countryList.getNames()});
   } catch (error) {
-    console.log(error);
     next();
     return error;
   }
@@ -88,6 +87,7 @@ router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, re
 //edit form
 router.post('/cellars/:cellarId/wines/:wineId', requireLogin, async (req, res, next) => {
   try {
+    let cellarId = req.params.cellarId;
     let {name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure} = req.body;
     await Wine.findByIdAndUpdate(req.params.wineId, {$set: {
       name,
