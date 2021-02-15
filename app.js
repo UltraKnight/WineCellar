@@ -70,8 +70,8 @@ app.use('/', auth);
  const cellar = require('./routes/cellars.routes');
  app.use('/', cellar);
 
-// const wines = require('./routes/wines.routes');
-// app.use('/', wines);
+const wines = require('./routes/wines.routes');
+app.use('/', wines);
 
 
 

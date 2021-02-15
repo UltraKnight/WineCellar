@@ -77,13 +77,13 @@ router.post('/cellars/:id', requireLogin, async (req, res, next) => {
 });
 
 //show details
-router.get('/cellars/:id', requireLogin, async (req, res, next) => {
+router.get('/cellars/:id', requireLogin, async (req, res) => {
   let id = req.params.id;
   try {
       let cellar = await Cellar.findById(id).populate('wines');
       res.render('cellars-details', {cellar});
   } catch (error) {
-    res.render('index', {errorMessage: 'The page you tried to access is not working right now, git it a time!'});
+    res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});
     return error;
   }
 });
