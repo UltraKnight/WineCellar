@@ -10,20 +10,20 @@ const requireLogin = require('../configs/access-control.config');
 const countryList = require('country-list');
 
 //get all wines
-router.get('/cellars/:cellarId/wines', requireLogin, async (_req, res, next) => {
+router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
   try {
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate();
     //Get wines that are in this cellar
     res.render('wines-list', {cellar, countryList: countryList.getNames()});
   } catch (error) {
-    next();
-    return error;
+   next();
+   return error;
   }
 });
 
 //create form
-router.get('/cellars/:cellarId/wines/create', requireLogin, async (_req, res) => {
+router.get('/cellars/:cellarId/wines/create', requireLogin, async (req, res) => {
   res.render('wines-create', {cellarId: req.params.cellarId});
 });
                   

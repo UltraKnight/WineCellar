@@ -73,4 +73,4 @@ app.use('/', auth);
 const wines = require('./routes/wines.routes');
 app.use('/', wines);
 
-const countryList = require('country-list');
+module.exports = app;
