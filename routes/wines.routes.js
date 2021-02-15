@@ -75,10 +75,11 @@ router.post('/cellars/:cellarId/wines/:wineId/delete', requireLogin, async (req,
 //update wine form
 router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, res, next) => {
   try {
-    let cellar = await Cellar.findById(cellarId);
-    let wine = await Wine.findById(wineId);
+    let cellar = await Cellar.findById(req.params.cellarId);
+    let wine = await Wine.findById(req.params.wineId);
     res.render('wines-edit', {wine, cellar, countryList: countryList.getNames()});
   } catch (error) {
+    console.log(error);
     next();
     return error;
   }
