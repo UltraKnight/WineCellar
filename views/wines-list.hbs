@@ -2,3 +2,25 @@
 <hr>
 
 <a href="/cellars/{{cellar.id}}/wines/create">Create new</a>
+
+<!-- listar vinho e delete e edit-->
+
+{{#each wines}}  <!-- to have access to all the wines -->
+
+<h3>
+    <a href="//cellars/:cellarId/wines">{{name}}</a> <!-- to show the name of wine -->
+
+    <a href="/cellars/:cellarId/wines/:wineId">See More</a> <!-- To go to details page of each -->
+
+    <form action="/wines/wineId" method="POST">  <!-- e
+    
+        <a href="/cella"
+    </form>
+
+
+    <form action="/cellars/:cellarId/wines/delete" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+</h3>
+
+{{/each}}
