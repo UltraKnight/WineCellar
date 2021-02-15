@@ -28,6 +28,11 @@ a {
   font-size: 4.2rem;
 }
 
+.slim-select {
+  display: inline-block;
+  min-width: 250px;
+}
+
 @media only screen and (max-width: 767px) {
   body {
     padding-top: 57px;

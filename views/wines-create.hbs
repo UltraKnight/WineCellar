@@ -6,12 +6,14 @@
 <label>Name:</label>
         <input type="text" name="name" value="{{wine.name}}">
 
- <label>Country:</label>
-        <select name="country">
+    <div class="slim-select">
+        <label for="country-list">Country:</label>
+        <select name="country" id="country-list" class="">
             {{#each countryList}}
                <option value="{{this}}">{{this}}</option>
             {{/each}}
         </select>
+    </div>
 
 
 <label>Year:</label>
@@ -28,13 +30,13 @@
     <label>Blend/Grape Mix:</label>
         <input type="text" name="blend" value="{{wine.blend}}">
 
-    <label>Alcohol By Volume:</label>
+    <label>Alcohol By Volume (%):</label>
         <input type="number" name="abv" value="{{wine.abv}}">
 
     <label>Expiration Date:</label>
         <input type="date" name="drinkUntil" value="{{wine.drinkUntil}}">
 
-    <label>Bottle Size:</label>
+    <label>Bottle Size (ml):</label>
         <input type="number" name="bottleSize" value="{{wine.bottleSize}}">
 
     <label>Closure:</label>
@@ -43,3 +45,9 @@
     <button type="submit">Create Wine</button> 
 
 </form>
+
+<script type="text/javascript">
+    new SlimSelect({
+        select: document.getElementById('country-list')
+    });
+</script>
