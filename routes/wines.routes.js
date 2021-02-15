@@ -15,7 +15,7 @@ router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate();
     //Get wines that are in this cellar
-    res.render('wines-list', {cellar, countryList: countryList.getNames()});
+    res.render('wines-list', {cellar});
   } catch (error) {
    next();
    return error;
@@ -24,7 +24,7 @@ router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
 
 //create form
 router.get('/cellars/:cellarId/wines/create', requireLogin, async (req, res) => {
-  res.render('wines-create', {cellarId: req.params.cellarId});
+  res.render('wines-create', {cellarId: req.params.cellarId, countryList: countryList.getNames()});
 });
                   
 //create new Wine
@@ -77,7 +77,7 @@ router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, re
   try {
     let cellar = await Cellar.findById(cellarId);
     let wine = await Wine.findById(wineId);
-    res.render('wines-edit', {wine, cellar});
+    res.render('wines-edit', {wine, cellar, countryList: countryList.getNames()});
   } catch (error) {
     next();
     return error;
