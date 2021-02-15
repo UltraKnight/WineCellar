@@ -1,9 +1,10 @@
 <h1>My Cellars</h1>
 <hr>
-    {{#each cellars}}
 
-<h3>
-    <a href="/cellars/{{id}}">{{title}}</a> 
+
+<a href="/cellars/create">Create a New Cellar</a>
+
+{{#each cellars}}
 
     <form action="/cellars/{{id}}" method="POST">
     <a href="/cellars/{{id}}/edit">Edit My Cellar</a>
@@ -12,7 +13,5 @@
     <form action="/cellars/{{id}}/delete" method="POST">
     <button type="submit">Delete Cellar</button>
     </form>
-
-</h3>
 
 {{/each}}
