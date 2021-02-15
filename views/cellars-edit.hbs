@@ -1,18 +1,18 @@
 <h1>Edit My Cellars</h1>
 
-<form action="/cellars/{{cellar.id}}/edit" method="POST">
+<form action="/cellars/{{cellar.id}}" method="POST">
 
 <label>Name</label>
-<input type="text" name="name" value="{{cellar.name}}">
+    <input type="text" name="name" value="{{cellar.name}}">
 
 <label>Place</label>
-<input type="text" name="place" value="{{cellar.place}}">
+    <input type="text" name="place" value="{{cellar.place}}">
 
 <label>Capacity</label>
-<input 
+    <input type="number" name="capacity" value="{{cellar.capacity}}">
 
 <label>Wine</label>
-<input type="text" name="wines" value="{{cellar.wines}}">
+    <input type="text" name="wines" value="{{cellar.wines}}">
 
 
 
