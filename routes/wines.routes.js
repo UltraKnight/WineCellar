@@ -4,9 +4,10 @@
 
 const express = require('express');
 const Cellar = require('../models/Cellar.model');
-const Wine = reuire('../models/Wine.model');
+const Wine = require('../models/Wine.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
+const countryList = require('country-list');
 
 //get all wines
 router.get('/cellars/:cellarId/wines', requireLogin, async (_req, res, next) => {
@@ -14,7 +15,7 @@ router.get('/cellars/:cellarId/wines', requireLogin, async (_req, res, next) => 
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate();
     //Get wines that are in this cellar
-    res.render('wines-list', {cellar});
+    res.render('wines-list', {cellar, countryList: countryList.getNames()});
   } catch (error) {
     next();
     return error;
