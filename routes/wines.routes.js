@@ -15,7 +15,7 @@ router.get('/cellars/:cellarId/wines', requireLogin, async (_req, res, next) => 
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate();
     //Get wines that are in this cellar
-    res.render('wines-list', {cellar, countryList: countryList.getNames()});
+    res.render('wines-list', {cellar});
   } catch (error) {
     next();
     return error;
