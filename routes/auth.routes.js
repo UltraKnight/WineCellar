@@ -3,7 +3,7 @@ const router  = express.Router();
 const User = require('../models/User.model');
 const bcrypt = require('bcrypt');
 const { /*gmail*/ outlook, mailOptions} = require('../configs/nodemailer.config'); //choose between gmail or outlook
-mailOptions.from = 'WINE CELLAR <alsr@live.com.pt>'; //change sender email here
+mailOptions.from = 'WINE CELLAR <vanderlei.i.martins@outlook.com>'; //change sender email here
 
 router.get('/signup', (_req, res) => {
     res.render('auth/signup');

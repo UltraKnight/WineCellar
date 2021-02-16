@@ -4,10 +4,10 @@ Didn't find your wine? Let's <a href="/cellars/{{cellarId}}/wines/create">Create
 <form action="/cellars/{{cellarId}}/wines/add/info" method="POST">
     <div class="slim-select">
         <label for="wine-list">Wine List:</label>
-        <select name="wineId" id="wine-list" onchange="populateForm();">
+        <select name="wineId" id="wine-list">
             <option selected value="" disabled>Select a wine to add</option>
             {{#each wines}}
-                <option value="{{id}}">{{year}} - {{name}} - {{type}}</option>
+                <option value="{{id}}">{{this.year}} - {{name}} - {{type}}</option>
             {{/each}}
         </select>
     </div>
@@ -38,8 +38,4 @@ Didn't find your wine? Let's <a href="/cellars/{{cellarId}}/wines/create">Create
         select: document.getElementById('country-list'),
         select: document.getElementById('wine-list')
     });
-
-    const populateForm = () => {
-        
-    };
 </script>
