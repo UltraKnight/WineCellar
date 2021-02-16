@@ -8,13 +8,13 @@ const wineSchema = new Schema ({
     annotations:{
         type: String,
         trim: true
-    }, 
+    },
     type: {
         type: String,
-        enum: [ 'red', 'white', 'rose', 'sparkling', 'dessert', 'green' ]
+        enum: ['red', 'white', 'rose', 'sparkling', 'dessert', 'green', 'porto']
     },
-    blend: String, 
-    abv: Number, 
+    blend: String,
+    abv: Number,
     drinkUntil: Date,
     bottleSize: Number,
     closure: String

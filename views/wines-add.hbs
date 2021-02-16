@@ -1,0 +1,45 @@
+<!-- /cellars/:cellarId/wines/:wineId -->
+<h1>Add a Wine</h1>
+Didn't find your wine? Let's <a href="/cellars/{{cellarId}}/wines/create">Create a new wine</a>
+<form action="/cellars/{{cellarId}}/wines/add/info" method="POST">
+    <div class="slim-select">
+        <label for="wine-list">Wine List:</label>
+        <select name="wineId" id="wine-list" onchange="populateForm();">
+            <option selected value="" disabled>Select a wine to add</option>
+            {{#each wines}}
+                <option value="{{id}}">{{year}} - {{name}} - {{type}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <button type="submit">See wine information</button>
+</form>
+
+{{#if selectedWine}}
+    <h6>Name: {{selectedWine.name}}</h6>
+    <h6>Year: {{selectedWine.year}}</h6>
+    <h6 style="max-width: 500px;">Notes: {{selectedWine.annotations}}</h6>
+    <h6>Type: {{selectedWine.type}}</h6>
+    <h6>Blend: {{selectedWine.blend}}</h6>
+    <h6>Alcohol: {{selectedWine.abv}}%</h6>
+    <h6>Drink Until: {{selectedWine.drinkUntil}}</h6>
+    <h6>Bottle Size: {{selectedWine.bottleSize}}ml</h6>
+    <h6>Closure: {{selectedWine.closure}}</h6>
+
+    <form action="/cellars/{{cellarId}}/wines/add" method="POST">
+        <input type="hidden" name="wineId" value="{{selectedWine.id}}">
+
+        <button type="submit">Add this wine</button>
+    </form>
+{{/if}}
+
+<script type="text/javascript">
+    new SlimSelect({
+        select: document.getElementById('country-list'),
+        select: document.getElementById('wine-list')
+    });
+
+    const populateForm = () => {
+        
+    };
+</script>
