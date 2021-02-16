@@ -48,6 +48,10 @@ app.use(
       })
   })
 );
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
