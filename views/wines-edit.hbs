@@ -9,13 +9,17 @@
         <label for="country-list">Country:</label>
         <select name="country" id="country-list">
             {{#each countryList}}
-               <option value="{{this}}">{{this}}</option>
+                {{#eq this ../wine.country}}
+                    <option value="{{this}}" selected>{{this}}</option>
+                {{else}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/eq}}
             {{/each}}
         </select>
     </div>
 
     <label>Year:</label>
-        <input type="number" name="year" value="{{wine.year}}" max="getCurrentYear();">
+        <input type="number" name="year" value="{{wine.year}}">
 
     <label>Annotations:</label>
         <textarea name="annotations" cols="30" rows="4">{{wine.annotations}}</textarea>
