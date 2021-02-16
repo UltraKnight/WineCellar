@@ -1,5 +1,5 @@
 <div class="container-fluid container-general container-wine">
-    <div class="col-md-4 offset-4 text-light">
+    <div class="col-md-4 offset-md-4 text-light">
     <div class="text-center">
         <h1 class="title" id="app-name">{{title}}</h1>
         <h5 class="title">Create a Wine</h5>
@@ -15,7 +15,11 @@
                     <label class="form-label" for="country-list">Country</label>
                     <select name="country" id="country-list">
                         {{#each countryList}}
-                            <option value="{{this}}">{{this}}</option>
+                            {{#eq this 'Portugal'}}
+                                <option value="{{this}}" selected>{{this}}</option>
+                            {{else}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/eq}}
                         {{/each}}
                     </select>
                 </div>

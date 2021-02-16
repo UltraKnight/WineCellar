@@ -1,37 +1,53 @@
-<!-- /cellars/:cellarId/wines/:wineId -->
-<h1>Add a Wine</h1>
-Didn't find your wine? Let's <a href="/cellars/{{cellarId}}/wines/create">Create a new wine</a>
-<form action="/cellars/{{cellarId}}/wines/add/info" method="POST">
-    <div class="slim-select">
-        <label for="wine-list">Wine List:</label>
-        <select name="wineId" id="wine-list">
-            <option selected value="" disabled>Select a wine to add</option>
-            {{#each wines}}
-                <option value="{{id}}">{{this.year}} - {{name}} - {{type}}</option>
-            {{/each}}
-        </select>
+<div class="container-fluid container-general container-wine">
+    <div class="col-md-4 offset-md-4 text-light">
+        <div class="text-center">
+            <h1 class="title" id="app-name">{{title}}</h1>
+            <h5 class="title">Add a Wine</h5>
+            Didn't find your wine? Let's <a href="/cellars/{{cellarId}}/wines/create">Create a new wine</a>
+        </div>
+
+        <form class="mb-3" action="/cellars/{{cellarId}}/wines/add/info" method="POST">
+            <div class="slim-select mb-3">
+                <label class="form-label" for="wine-list">Wine List:</label>
+                <select name="wineId" id="wine-list">
+                    <option selected value="" disabled>Select a wine to add</option>
+                    {{#each wines}}
+                        <option value="{{id}}">{{this.year}} - {{name}} - {{type}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <button class="btn btn-info" type="submit">See wine information</button>
+        </form>
+
+        {{#if selectedWine}}
+            <div class="mb-3">
+                <h6>Name: {{selectedWine.name}}</h6>
+                <hr>
+                <h6>Year: {{selectedWine.year}}</h6>
+                <hr>
+                <h6 style="max-width: 500px;">Notes: {{selectedWine.annotations}}</h6>
+                <hr>
+                <h6>Type: {{selectedWine.type}}</h6>
+                <hr>
+                <h6>Blend: {{selectedWine.blend}}</h6>
+                <hr>
+                <h6>Alcohol: {{selectedWine.abv}}%</h6>
+                <hr>
+                <h6>Drink Until: {{selectedWine.drinkUntil}}</h6>
+                <hr>
+                <h6>Bottle Size: {{selectedWine.bottleSize}}ml</h6>
+                <hr>
+                <h6>Closure: {{selectedWine.closure}}</h6>
+            </div>
+            <form action="/cellars/{{cellarId}}/wines/add" method="POST">
+                <input type="hidden" name="wineId" value="{{selectedWine.id}}">
+
+                <button class="btn btn-danger" type="submit">Add {{selectedWine.name}}</button>
+            </form>
+        {{/if}}
     </div>
-
-    <button type="submit">See wine information</button>
-</form>
-
-{{#if selectedWine}}
-    <h6>Name: {{selectedWine.name}}</h6>
-    <h6>Year: {{selectedWine.year}}</h6>
-    <h6 style="max-width: 500px;">Notes: {{selectedWine.annotations}}</h6>
-    <h6>Type: {{selectedWine.type}}</h6>
-    <h6>Blend: {{selectedWine.blend}}</h6>
-    <h6>Alcohol: {{selectedWine.abv}}%</h6>
-    <h6>Drink Until: {{selectedWine.drinkUntil}}</h6>
-    <h6>Bottle Size: {{selectedWine.bottleSize}}ml</h6>
-    <h6>Closure: {{selectedWine.closure}}</h6>
-
-    <form action="/cellars/{{cellarId}}/wines/add" method="POST">
-        <input type="hidden" name="wineId" value="{{selectedWine.id}}">
-
-        <button type="submit">Add this wine</button>
-    </form>
-{{/if}}
+</div>
 
 <script type="text/javascript">
     new SlimSelect({
