@@ -39,7 +39,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="type-list">Type</label>
-                <select class="form-select" name="type-list" id="type-list">
+                <select class="form-select" name="type" id="type-list">
                     {{#each types}}
                         {{#eq this ../wine.type}}
                             <option value="{{this}}" selected>{{this}}</option>
