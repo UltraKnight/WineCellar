@@ -113,7 +113,7 @@ router.get('/cellars/:cellarId/wines/:wineId', requireLogin, async (req, res) =>
   let wineId = req.params.wineId;
   try {
       let wine = await Wine.findById(wineId);
-      res.render('wines-details', {wine});
+      res.render('wines-details', {wine, cellarId : req.params.cellarId});
   } catch (error) {
     res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});
     return error;

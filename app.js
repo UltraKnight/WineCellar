@@ -73,7 +73,11 @@ app.use('/', auth);
 const wines = require('./routes/wines.routes');
 app.use('/', wines);
 
+<<<<<<< HEAD
 const api = require('./routes/api.routes');
+=======
+const api = require('./routes/apitest.routes');
+>>>>>>> c8468e84d7a1d3b9485b4bfed6736713ee2e5515
 app.use('/', api);
 
 module.exports = app;

@@ -6,15 +6,26 @@ body {
 a {
   color: #00B7FF; }
 
-.container-login {
+.container-login, .container-cellar {
   height: 93vh;
-  background-image: url("/images/wines_bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center; }
 
+.container-login {
+  background-image: url("/images/wines_bg.jpg"); }
+
+.container-cellar {
+  color: white;
+  background-image: url("/images/wine_cellar.jpg"); }
+
 .title {
   text-shadow: 1px 1px 2px black; }
+
+.cellars {
+  background-color: rgba(0, 0, 0, 0.3); }
+  .cellars a {
+    text-decoration: none; }
 
 #app-name {
   transition: font-size 0.5s; }
@@ -25,6 +36,9 @@ a {
 .slim-select {
   display: inline-block;
   min-width: 250px; }
+
+li {
+  list-style: none; }
 
 @media only screen and (max-width: 767px) {
   body {

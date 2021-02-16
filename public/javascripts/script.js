@@ -8,13 +8,17 @@ window.onload = () => {
     appNameElem.classList.add('big-text');
   }
 
-  const updateScroll = () => {
-    if(window.scrollY <= 10) {
-      appNameElem.classList.add('big-text');
-    } else {
-      appNameElem.classList.remove('big-text');
-    }
+  const updateScroll = (elemen) => {
+    return () => {
+        if(elemen) {
+        if(window.scrollY <= 10) {
+          elemen.classList.add('big-text');
+        } else {
+          elemen.classList.remove('big-text');
+        }
+      }
+    };
   };
-  
-  window.addEventListener('scroll', updateScroll);
+
+  window.addEventListener('scroll', updateScroll(appNameElem));
 };
