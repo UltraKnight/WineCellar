@@ -20,5 +20,8 @@ window.onload = () => {
     };
   };
 
+
+
   window.addEventListener('scroll', updateScroll(appNameElem));
 };
+

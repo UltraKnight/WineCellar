@@ -1,24 +1,70 @@
-<h1>Wine List of This Cellar</h1>  <!-- change to {{cellar.id}} to have the name of the cellar on the page -->
-<hr>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>     
+        .container {
+            display: flex;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            max-width: 600px;
+            height: fit-content;
+        }
+        .container div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            margin: 0;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id='pos1' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos2'ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos3'ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos4'ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos6' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos7' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos8' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos9' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos10' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos11' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos12' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos13' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos14' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <div id='pos15' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    </div>
+    <br>
+    <p>Meowrraste</p>
+    <img id="drag1" src="/images/top_view_bottle.png" draggable="true" ondragstart="drag(event)" width="60" height="60">
+    <img id="drag2" src="/images/top_view_bottle.png" draggable="true" ondragstart="drag(event)" width="60" height="60">
 
-<a href="/cellars/{{cellar.id}}/wines/create">Create new</a>
+    <script>
+       
+        //For the drag and drop
+    function allowDrop(ev) {
+    ev.preventDefault();
+    }
 
-<!-- listar vinho e delete e edit-->
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
 
-{{#each cellar.wines}}  <!-- to have access to all the wines -->
+    function drop(ev) {
+        if(ev.target.innerHTML === '' && ev.target.tagName === 'DIV') {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));    }
+    }
+</script>
 
-<div>
-    <a href="/cellars/{{../cellar.id}}/wines/{{id}}">{{name}}</a> <!-- to show the name of wine -->
-
-   <!-- <a href="/cellars/:cellarId/wines/:wineId">See More</a> --> <!-- To go to details page of each -->
-
-
-    <a href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">Edit</a>
-   
-
-    <form action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
-        <button type="submit">Delete</button>
-    </form>
-</div>
-
-{{/each}}
+</body>
+</html>
