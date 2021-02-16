@@ -1,11 +1,26 @@
 <style>    
+
         .wine-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
             position: relative;
             width: 150px;
             height: 150px;
             text-align: center;
             border: 1px solid black;
-        
+        }
+
+        .wine-container p {
+            position: absolute;
+            top: 0px;
+            margin: 0 auto;
+        }
+
+        .plus-icon {
+            position:absolute;
+            bottom: 126px;
+            right: 0px;
         }
 
         .edit-icon {
@@ -19,63 +34,31 @@
             right: 0;
             bottom: 0;
         }
-    </style>
-
-    <!-- link to add a new wine -->
-    <a href="/cellars/{{cellar.id}}/wines/add">Add Wine</a>
-
+    </style> 
+        <div class="container-general d-flex"> 
         {{#each cellar.wines}}
             <div class="wine-container">
+                <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add">
+                    <i class="bi-plus-square" style="font-size: 1.2rem; color:maroon"></i>
+                </a>
                <p>{{name}}</p>
                 <img src="/images/top_view_bottle.png">
-             <a class="edit-icon" href="">
+
+             <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
                  <i class="bi-pencil-square" style="font-size: 1.2rem; color: green;"></i>
              </a>
-             <a class="delete-icon" href="">
-                <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
-             </a>
+
+             <form action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
+                 <button class="delete-icon">
+                    <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
+                </button>
+             </form>
            </div> 
         {{/each}}
-        <br> 
-  
-     <!--  < <div id='pos1' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos2'ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos3'ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos4'ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos6' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos7' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos8' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos9' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos10' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos11' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos12' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos13' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos14' ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-        <div id='pos15' ondrop="drop(event)" ondragover="allowDrop(event)"></div> -->
-    
-    <!--
-    <p>Drag me:</p>
-    <img id="drag1" src="/images/top_view_bottle.png" draggable="true" ondragstart="drag(event)" width="60" height="60">
-    <img id="drag2" src="/images/top_view_bottle.png" draggable="true" ondragstart="drag(event)" width="60" height="60">
-    -->
-<!--
-    <script> 
-        //For the drag and drop
-    function allowDrop(ev) {
-    ev.preventDefault();
-    }
+            <script>
+                //console.log({{cellar.wines.length}});
+                //console.log({{cellar.capacity}});
 
-    function drag(ev) {
-        ev.dataTransfer.setData("text", ev.target.id);
-    }
-
-    function drop(ev) {
-        if(ev.target.innerHTML === '' && ev.target.tagName === 'DIV') {
-        ev.preventDefault();
-        var data = ev.dataTransfer.getData("text");
-        ev.target.appendChild(document.getElementById(data));    }
-    }
-
-    </script> -->
-    
+            </script>        
+        </div>
 
