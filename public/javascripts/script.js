@@ -20,8 +20,12 @@ window.onload = () => {
     };
   };
 
+  const updateCopyright = () => {
+    const currentYear = new Date().getFullYear();
+    document.getElementById('currentYear').innerHTML = currentYear;
+  };
 
-
+  updateCopyright();
   window.addEventListener('scroll', updateScroll(appNameElem));
 };
 
