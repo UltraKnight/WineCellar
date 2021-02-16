@@ -1,7 +1,9 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 
 mongoose
-  .connect('mongodb://localhost/wine-cellar', {
+  //.connect('mongodb://localhost/wine-cellar', {
+  .connect(process.env.MONGODB_URI, {
   useNewUrlParser: true, 
   useCreateIndex: true,
   useUnifiedTopology: true,

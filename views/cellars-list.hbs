@@ -1,4 +1,4 @@
-<div class="container-fluid container-cellar p-0">
+<div class="container-fluid container-general container-cellar p-0">
 
     {{!-- <h1>My Cellars</h1>
     <hr>
@@ -18,7 +18,7 @@
         </form>
     {{/each}} --}}
 
-    <div class="col-md-6">
+    <div class="col-md-6 table-responsive-sm">
         <table class="table text-light table-striped cellars"> <!--style="width: 98vw;"-->
             <tr class="text-light align-middle">
                 <th class="fs-2" colspan="3">My Cellars</th>
@@ -43,7 +43,7 @@
 
                     <td>
                         <form action="/cellars/{{id}}/delete" method="POST">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete Cellar</button>
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                     </form>
                     </td>
                 </tr>

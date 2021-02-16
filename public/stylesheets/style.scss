@@ -8,8 +8,9 @@ a {
   color: #00B7FF;
 }
 
-.container-login, .container-cellar {
-  height: 93vh;
+.container-general {
+  min-height: 93vh;
+  padding-bottom: 10px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
@@ -24,6 +25,10 @@ a {
   background-image: url('/images/wine_cellar.jpg');
 }
 
+.container-wine  {
+  background-color: rgb(53, 0, 0);
+}
+
 .title {
   text-shadow: 1px 1px 2px black;
 }
@@ -35,17 +40,18 @@ a {
   }
 }
 
+form {
+  a {
+    text-decoration: none;
+  }
+}
+
 #app-name {
   transition: font-size 0.5s;
 }
 
 .big-text {
   font-size: 4.2rem;
-}
-
-.slim-select {
-  display: inline-block;
-  min-width: 250px;
 }
 
 li {

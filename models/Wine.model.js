@@ -2,7 +2,10 @@ const mongoose = require ('mongoose');
 const { Schema, model } = mongoose; 
 
 const wineSchema = new Schema ({
-    name: String,
+    name: {
+        type: String,
+        required: [true, 'You need to give a name to your wine']
+    },
     country: String,
     year: Number,
     annotations:{
@@ -14,7 +17,11 @@ const wineSchema = new Schema ({
         enum: ['red', 'white', 'rose', 'sparkling', 'dessert', 'green', 'porto']
     },
     blend: String,
-    abv: Number,
+    abv: {
+        type: Number,
+        min: 3,
+        max: 90
+    },
     drinkUntil: Date,
     bottleSize: Number,
     closure: String
