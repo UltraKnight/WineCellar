@@ -23,7 +23,7 @@ a {
 .container-wine {
   background-color: #350000; }
 
-.title {
+.title, .shaded {
   text-shadow: 1px 1px 2px black; }
 
 .cellars {

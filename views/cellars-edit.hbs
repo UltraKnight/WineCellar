@@ -1,22 +1,37 @@
-<h1>Edit My Cellars</h1>
+<div class="container-fluid container-general container-cellar">
+    <div class="col-md-4 offset-4 text-light">
+        <div class="text-center">
+            <h1 class="title" id="app-name">{{title}}</h1>
+            <h5 class="title">Update Cellar</h5>
+        </div>
+        <form action="/cellars/{{cellar.id}}" method="POST">
+            <div class="mb-3">
+                <label class="form-label shaded" for="name">Name</label>
+                <input class="form-control" type="text" name="name" id="name" 
+                    value="{{cellar.name}}" placeholder="Insert cellar's new name here" required>
+            </div>
 
-<form action="/cellars/{{cellar.id}}" method="POST">
+            <div class="mb-3">
+                <label class="form-label shaded" for="place">Place</label>
+                <input class="form-control" type="text" name="place" id="place"
+                    value="{{cellar.place}}" placeholder="Where is it?">
+            </div>
 
-<label>Name</label>
-    <input type="text" name="name" value="{{cellar.name}}">
+            <div class="mb-3">
+                <label class="form-label shaded" for="capacity">Capacity</label>
+                <input class="form-control" type="number" name="capacity" id="capacity" 
+                    value="{{cellar.capacity}}" min="{{cellar.wines.length}}" max="900" placeholder="How much spaces does your cellar have?">
+            </div>
 
-<label>Place</label>
-    <input type="text" name="place" value="{{cellar.place}}">
+            <button class="btn btn-danger" type="submit">Update this Cellar</button>
+            <a href="/cellars" class="btn btn-warning float-end">Cancel</a>
 
-<label>Capacity</label>
-    <input type="number" name="capacity" value="{{cellar.capacity}}">
-
-<label>Wine</label>
-    <input type="text" name="wines" value="{{cellar.wines}}">
-
-
-
-
-<button type="submit">Update My Cellar</button>
-
-</form>
+            {{#if errorMessage}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{errorMessage}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {{/if}}
+        </form>
+    </div>
+</div>

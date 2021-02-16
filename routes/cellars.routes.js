@@ -67,8 +67,13 @@ router.get('/cellars/:id/edit', requireLogin, async (req, res, next) => {
 //edit form
 router.post('/cellars/:id', requireLogin, async (req, res, next) => {
   try {
-    let {name, place} = req.body;
-    await Cellar.findByIdAndUpdate(req.params.id, {$set: {name, place}});
+    let {name, place, capacity} = req.body;
+    const cellar = await Cellar.findById(req.params.id);
+    if(cellar.wines.length > capacity) {
+      res.render('cellars-edit', {cellar, errorMessage: 'You can\'t have more wines than free spaces in your cellar.'});
+      return;
+    }
+    await Cellar.findByIdAndUpdate(req.params.id, {$set: {name, place, capacity}});
     res.redirect('/cellars');
   } catch (error) {
     next();

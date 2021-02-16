@@ -1,7 +1,7 @@
 <div class="container-fluid container-general container-wine">
     <div class="col-md-4 offset-4 text-light">
     <div class="text-center">
-        <h1 id="app-name">{{title}}</h1>
+        <h1 class="title" id="app-name">{{title}}</h1>
         <h5 class="title">Create a Wine</h5>
     </div>
         <form action="/cellars/{{cellarId}}/wines" method="POST">
@@ -53,7 +53,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="abv">Alcohol By Volume (%):</label>
-                <input class="form-control" min="3" max="90" type="number" name="abv" id="abv" placeholder="% Alcohol Content">
+                <input class="form-control" min="3" max="90" step="0.1" type="number" name="abv" id="abv" placeholder="% Alcohol Content">
             </div>
 
             <div class="mb-3">
