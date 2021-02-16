@@ -114,7 +114,8 @@ router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, re
   try {
     let cellar = await Cellar.findById(req.params.cellarId);
     let wine = await Wine.findById(req.params.wineId);
-    res.render('wines-edit', {wine, cellar, countryList: countryList.getNames()});
+    let types = ['red', 'white', 'rose', 'sparkling', 'green', 'porto', 'dessert'];
+    res.render('wines-edit', {types, wine, cellar, countryList: countryList.getNames()});
   } catch (error) {
     next();
     return error;
