@@ -98,9 +98,9 @@ router.post('/cellars/:cellarId/wines/:wineId/delete', requireLogin, async (req,
     let cellarId = req.params.cellarId;
     let wineId = req.params.wineId;
     //remove wine from collecion
-    await Wine.findByIdAndDelete(wineId);
+    //await Wine.findByIdAndDelete(wineId);
     //remove this wine from Cellar
-    await Cellar.findByIdAndUpdate(cellarId, {$pull: { wines: {_id: wineId}}});
+    await Cellar.findByIdAndUpdate(cellarId, {$pull: { wines: wineId}});
 
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
