@@ -1,14 +1,14 @@
 <style>    
 
         .wine-container {
-            display: flex;
-            align-items: flex-end;
+            display: flex; 
+            align-items: flex-end; 
             justify-content: center;
             position: relative;
             width: 150px;
             height: 150px;
             text-align: center;
-            border: 1px solid black;
+            border: 1px solid black;    
         }
 
         .wine-container p {
@@ -18,7 +18,7 @@
         }
 
         .plus-icon {
-            position:absolute;
+            position: absolute;
             bottom: 126px;
             right: 0px;
         }
@@ -34,14 +34,20 @@
             right: 0;
             bottom: 0;
         }
-    </style> 
-        <div class="container-general d-flex"> 
+ </style> 
+
+
+     <div class="container-general d-flex" id="grid-container"> 
+
         {{#each cellar.wines}}
-            <div class="wine-container">
-                <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add">
+         <div class="wine-container">
+         <!--    <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add"></a>
                     <i class="bi-plus-square" style="font-size: 1.2rem; color:maroon"></i>
-                </a>
-               <p>{{name}}</p>
+             </a> -->
+             <a href="/cellars/{{../cellar.id}}/wines/{{id}}">
+                <p>{{name}}</p>
+              </a>
+
                 <img src="/images/top_view_bottle.png">
 
              <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
@@ -53,12 +59,33 @@
                     <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
                 </button>
              </form>
-           </div> 
-        {{/each}}
-            <script>
-                //console.log({{cellar.wines.length}});
-                //console.log({{cellar.capacity}});
+          </div> 
 
-            </script>        
-        </div>
+      {{/each}}
+        
+        <script>
+            let max = {{cellar.capacity}} - {{cellar.wines.length}};
+            let container = document.getElementById('grid-container');
+            let div;
+            let text;
+
+            for(let i = 1; i <= max; i++) {
+                div = document.createElement('div');
+                div.innerHTML = `
+                <div class="wine-container">
+                <a class="plus-icon" href="/cellars/{{cellar.id}}/wines/add">
+                    <i class="bi-plus-square" style="font-size: 2.1rem; color:maroon"></i>
+                </a>
+                    `
+                ;
+                container.appendChild(div);
+            }
+
+        </script>
+ 
+
+                
+     </div>
+     
+
 
