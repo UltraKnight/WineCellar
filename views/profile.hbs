@@ -21,6 +21,7 @@
 
         <!-- test for selector for favorite wines and so on -->
          <div>
+             <label class="form-label-check" for="wine-list">My Favorite Types of Wine:</label>
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                     <label class="form-check-label" for="flexSwitchCheckDefault">Red</label>
@@ -37,17 +38,26 @@
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                     <label class="form-check-label" for="flexSwitchCheckChecked">Dessert</label>
                 </div>
-                
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Green</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Green</label>
                 </div>
                 <div class="form-check form-switch">
                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                                <label class="form-check-label" for="flexSwitchCheckChecked">Porto</label>
-</div>
+                     <label class="form-check-label" for="flexSwitchCheckChecked">Porto</label>
                 </div>
+             </div>
         <!-- test end -->
-                             
+    
+    <!-- Test the wineLover selection -->
+    <label class="form-label-wine-lover" for="wine-list">WineLover Meter:</label>
+        <select class="form-select" aria-label="Default select example">
+            <option selected>Open to see the meter</option>
+            <option value="1">Wine Enthusiast (Love wine) </option>
+            <option value="2">Wine&Social (Drink socially)</option>
+            <option value="3">Grape Lover (Prefer grapes juice but drinks a glass once in a while)</option>
+        </select>
+    <!-- End of WineLove Selection test -->
 <!-- the delete button -->
         <form action="/profile/delete" method="POST">
             <input type="hidden" name="id" value="{{user._id}}">

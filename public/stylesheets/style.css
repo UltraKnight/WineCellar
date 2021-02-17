@@ -122,7 +122,6 @@ label.header {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 /* end of profile photo test */
-
 @media only screen and (max-width: 767px) {
   body {
     padding-top: 57px; } }
