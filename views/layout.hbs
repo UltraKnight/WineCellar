@@ -30,10 +30,13 @@
           </li> --}}
           {{#if session.currentUser}}
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/profile">My Profile</a>
+              <a class="nav-link" aria-current="page" href="/profile">My Profile</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/cellars">My Cellars</a>
+              <a class="nav-link" aria-current="page" href="/cellars">My Cellars</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/opened">Memories</a>
             </li>
             <li class="d-flex align-items-center ms-5">
               <span class="text-light me-3">Hello {{session.currentUser.username}}</span>

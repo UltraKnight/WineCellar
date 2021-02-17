@@ -13,7 +13,8 @@ const openedSchema = new Schema ({
       type: Number
     },
     openingDate: {
-      type: Date
+      type: Date,
+      default: Date.now()
     },
     type: {
       type: String,
