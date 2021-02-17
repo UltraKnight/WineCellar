@@ -15,7 +15,7 @@
   <!-- custom select -->
 </head>
 <body>
-  <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-md fixed-top navbar-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
         <i class="bi-house-fill" style="font-size: 1.2rem; color: white;"></i>
@@ -30,7 +30,7 @@
           </li> --}}
           {{#if session.currentUser}}
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">My Profile</a>
+              <a class="nav-link active" aria-current="page" href="/profile">My Profile</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/cellars">My Cellars</a>
@@ -51,7 +51,7 @@
    {{{body}}}
   </div>
   <!-- Footer -->
-  <footer class="bg-dark text-light container-fluid">
+  <footer class="text-light container-fluid">
     <!-- Footer Elements -->
     <div class="container">
       <div class="row">
@@ -67,7 +67,7 @@
         </div>
         <div class="col-md-4 py-5">
           <div class="mb-5 d-flex flex-column align-items-center">
-            <a href="">Github</a>
+            <a target="_blank" href="https://github.com/UltraKnight/WineCellar/">Github</a>
           </div>
         </div>
       </div>

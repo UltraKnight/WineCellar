@@ -10,7 +10,7 @@ a {
 
 .container-general {
   min-height: 93vh;
-  padding-bottom: 10px;
+  padding-bottom: 50px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: center;
@@ -26,6 +26,10 @@ a {
 }
 
 .container-wine  {
+  background-image: url('/images/pouring_wine.jpg');
+}
+
+footer, nav, .container-profile {
   background-color: rgb(53, 0, 0);
 }
 

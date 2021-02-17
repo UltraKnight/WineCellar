@@ -61,10 +61,9 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label" for="drinkUntil">Expiration Date:</label>
-                <input class="form-control" type="date" name="drinkUntil" id="drinkUntil" placeholder="Best date limit to drink this wine">
+                <label class="form-label" for="drinkUntil">Best date limit to drink:</label>
+                <input class="form-control" type="date" name="drinkUntil" id="drinkUntil">
             </div>
-
             <div class="mb-3">
                 <label class="form-label" for="bottleSize">Bottle size (ml):</label>
                 <input class="form-control" type="number" name="bottleSize" id="bottleSize" placeholder="ml">
@@ -92,7 +91,7 @@
     new SlimSelect({
         select: document.getElementById('country-list')
     });
-    
+
     function maxDate() {
         let today = new Date();
         let dd = today.getDate();

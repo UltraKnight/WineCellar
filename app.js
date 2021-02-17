@@ -85,4 +85,7 @@ app.use('/', wines);
 const api = require('./routes/apitest.routes');
 app.use('/', api);
 
+const profile = require('./routes/profile.routes');
+app.use('/', profile);
+
 module.exports = app;
