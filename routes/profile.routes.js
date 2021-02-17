@@ -20,6 +20,21 @@ router.get('/profile', requireLogin, async (req, res, next) => {
 //delete account
 //not implemented yet
 
+//try to do it
+router.post('/profile/delete', requireLogin, async (req, res, next) => {
+  try {
+    let userId = req.body.id;
+    req.session.currentUser = null;
+    //remove wine from collecion
+    await User.findByIdAndDelete(userId);
+    res.redirect('/');
+  } catch (error) {
+    next();
+    return error;
+  }
+});
+//try ends
+
 //change username
 router.post('/profile/:id/new-username', requireLogin, async (req, res, next) => {
   try {
@@ -32,5 +47,14 @@ router.post('/profile/:id/new-username', requireLogin, async (req, res, next) =>
     return error;
   }
 });
+
+/*
+//add profile photo
+router.get('/profile/:id/profile-photo', requirePhoto, async (req, res, next) => {
+  try {
+    let {imageURL} = req.body;
+    await User.
+  }
+})  */
 
 module.exports = router;

@@ -20,8 +20,11 @@ const userSchema = new Schema ({
       password: {
         type: String,
         require: [true, 'Password is required']
-      }, 
-        role: String
-      });
+      },
+        role: String,
+      
+      imageURL: String
+  });
 
-      module.exports = model('User', userSchema); 
+      
+     module.exports = model('User', userSchema);  
