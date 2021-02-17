@@ -101,13 +101,15 @@ router.post('/cellars/:cellarId/wines/:wineId/delete', requireLogin, async (req,
     //await Wine.findByIdAndDelete(wineId);
     //remove this wine from Cellar
     await Cellar.findByIdAndUpdate(cellarId, {$pull: { wines: wineId}});
-
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
     next();
     return error;
   }
 });
+
+//open wine
+//no implemented
 
 //update wine form
 router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, res, next) => {
