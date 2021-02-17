@@ -17,6 +17,12 @@ require('./configs/db.config');
 //Make handlebars helpers available on our views
 hbs.registerHelper(helpers());
 
+hbs.registerHelper('ifEq', function(n1, n2, options) {
+  if(n1 == n2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);

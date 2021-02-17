@@ -6,6 +6,7 @@ const express = require('express');
 const Cellar = require('../models/Cellar.model');
 const Wine = require('../models/Wine.model');
 const Opened = require('../models/Opened.model');
+const User = require('../models/User.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 const countryList = require('country-list');
@@ -26,10 +27,12 @@ router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
 //add form
 router.get('/cellars/:cellarId/wines/add', requireLogin, async (req, res, next) => {
   try {
-    let wines = await Wine.find();
+    let arrUsers = await User.find({username: [req.session.currentUser.username, 'WineKeeper']}).select('_id');
+    let wines = await Wine.find({createdBy: arrUsers});
     res.render('wines-add', {cellarId: req.params.cellarId, wines, countryList: countryList.getNames()});
   } catch (error) {
-    next();
+    console.log(error);
+    //next();
     return error;
   }
 });
@@ -37,10 +40,12 @@ router.get('/cellars/:cellarId/wines/add', requireLogin, async (req, res, next) 
 //add form with id
 router.post('/cellars/:cellarId/wines/add/info', requireLogin, async (req, res, next) => {
   try {
-    let wines = await Wine.find();
+    let arrUsers = await User.find({username: [req.session.currentUser.username, 'WineKeeper']}).select('_id');
+    let wines = await Wine.find({createdBy: arrUsers});
     let selectedWine = await Wine.findById(req.body.wineId);
     res.render('wines-add', {selectedWine, cellarId: req.params.cellarId, wines, countryList: countryList.getNames()});
   } catch (error) {
+    console.log(error)
     next();
     return error;
   }
@@ -69,11 +74,13 @@ router.get('/cellars/:cellarId/wines/create', requireLogin, async (req, res) => 
 router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
   //name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure
   let {name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure} = req.body;
+  let createdBy = req.session.currentUser._id;
   let cellarId = req.params.cellarId;
   //create the wine and add it to the cellar
   try {
     const createdWine = await Wine.create({
         name,
+        createdBy,
         country,
         year,
         annotations,
@@ -148,6 +155,12 @@ router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, re
   try {
     let cellar = await Cellar.findById(req.params.cellarId);
     let wine = await Wine.findById(req.params.wineId);
+    
+    if(wine.createdBy != req.session.currentUser._id) {
+      res.redirect(`/cellars/${cellar.id}/wines`);
+      return;
+    }
+
     let types = ['red', 'white', 'rose', 'sparkling', 'green', 'porto', 'dessert'];
     res.render('wines-edit', {types, wine, cellar, countryList: countryList.getNames()});
   } catch (error) {
