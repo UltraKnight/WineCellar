@@ -18,17 +18,43 @@
           </div>
         {{/if}}
         <h5>Email: {{user.email}}</h5>
-    </div>
 
+        <!-- test for selector for favorite wines and so on -->
+         <div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Red</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">White</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Sparkling</label>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Dessert</label>
+                </div>
+                
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Green</label>
+                </div>
+                <div class="form-check form-switch">
+                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Porto</label>
+</div>
+                </div>
+        <!-- test end -->
+                             
 <!-- the delete button -->
-<form action="/profile/delete" method="POST">
-    <input type="hidden" name="id" value="{{user._id}}">
-    <button id="btn-delete-username" class="btn btn-danger btn-sm" type="submit">Delete Username</button>
-</form>
- 
+        <form action="/profile/delete" method="POST">
+            <input type="hidden" name="id" value="{{user._id}}">
+            <button id="btn-delete-username" class="btn btn-danger btn-sm" type="submit">Delete Username</button>
+        </form>
 
- <!-- to test the profile pic -->
-
+<!-- to test the profile pic 
          <div class="container-photo">
              <div class="container-choose">
                   <form action="#" method="post">
@@ -41,4 +67,13 @@
             </div>
         </div>
     <!-- end of profile pic test -->
+
+    <!-- a different test with multer, cloudinary, multer-storage-cloudinary-->
+    <form action='/api/images' method="POST" enctype="multipart/form data">
+        <input type='file' name='image'/>
+        <input type="submit">
+    </form>
+
+    </div>
+
 </div>

@@ -14,9 +14,6 @@ router.get('/profile', requireLogin, async (req, res, next) => {
 });
 
 //delete account
-//not implemented yet
-
-//try to do it
 router.post('/profile/delete', requireLogin, async (req, res, next) => {
   try {
     let userId = req.body.id;
@@ -29,7 +26,7 @@ router.post('/profile/delete', requireLogin, async (req, res, next) => {
     return error;
   }
 });
-//try ends
+
 
 //change username
 router.post('/profile/:id/new-username', requireLogin, async (req, res, next) => {
