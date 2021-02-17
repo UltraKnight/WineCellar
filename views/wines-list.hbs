@@ -1,91 +1,45 @@
-<style>    
 
-        .wine-container {
-            display: flex; 
-            align-items: flex-end; 
-            justify-content: center;
-            position: relative;
-            width: 150px;
-            height: 150px;
-            text-align: center;
-            border: 1px solid black;    
-        }
-
-        .wine-container p {
-            position: absolute;
-            top: 0px;
-            margin: 0 auto;
-        }
-
-        .plus-icon {
-            position: absolute;
-            bottom: 126px;
-            right: 0px;
-        }
-
-        .edit-icon {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-        }
-
-        .delete-icon {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-        }
- </style> 
-
-
-     <div class="container-general d-flex" id="grid-container"> 
-
+<div class="container-fluid container-general container-wine">
+    <div id="grid-container" class="pt-3 m-auto">
         {{#each cellar.wines}}
-         <div class="wine-container">
-         <!--    <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add"></a>
-                    <i class="bi-plus-square" style="font-size: 1.2rem; color:maroon"></i>
-             </a> -->
-             <a href="/cellars/{{../cellar.id}}/wines/{{id}}">
-                <p>{{name}}</p>
-              </a>
-
-                <img src="/images/top_view_bottle.png">
-
-             <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
-                 <i class="bi-pencil-square" style="font-size: 1.2rem; color: green;"></i>
-             </a>
-
-             <form action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
-                 <button class="delete-icon">
-                    <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
-                </button>
-             </form>
-          </div> 
-
-      {{/each}}
-        
-        <script>
-            let max = {{cellar.capacity}} - {{cellar.wines.length}};
-            let container = document.getElementById('grid-container');
-            let div;
-            let text;
-
-            for(let i = 1; i <= max; i++) {
-                div = document.createElement('div');
-                div.innerHTML = `
-                <div class="wine-container">
-                <a class="plus-icon" href="/cellars/{{cellar.id}}/wines/add">
-                    <i class="bi-plus-square" style="font-size: 2.1rem; color:maroon"></i>
+            <div class="wine-container filled">
+            <!--    <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add"></a>
+                        <i class="bi-plus-square" style="font-size: 1.2rem; color:maroon"></i>
+                </a> -->
+                <a class="shaded top-centered" href="/cellars/{{../cellar.id}}/wines/{{id}}">
+                    <p>{{name}}</p>
                 </a>
-                    `
-                ;
-                container.appendChild(div);
-            }
 
-        </script>
- 
+                    <img src="/images/top_view_bottle.png" height="100px" width="100px">
 
-                
-     </div>
-     
+                <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
+                    <i class="bi-pencil-square" style="font-size: 1.2rem; color: lightgreen;"></i>
+                </a>
 
+                <form class="background-light" action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
+                    <button class="delete-icon border-0 bg-transparent">
+                        <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
+                    </button>
+                </form>
+            </div> 
+        {{/each}}
+    </div>
+</div>
 
+<script>
+    let max = {{cellar.capacity}} - {{cellar.wines.length}};
+    let container = document.getElementById('grid-container');
+    let div;
+    let text;
+
+    for(let i = 1; i <= max; i++) {
+        div = document.createElement('div');
+        div.innerHTML = `
+        <div class="wine-container">
+        <a class="plus-icon" href="/cellars/{{cellar.id}}/wines/add">
+            <i class="bi-plus-square" style="font-size: 4.1rem; color:darkred"></i>
+        </a>
+            `;
+        container.appendChild(div);
+    }
+</script>
