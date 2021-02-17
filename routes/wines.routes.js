@@ -45,7 +45,6 @@ router.post('/cellars/:cellarId/wines/add/info', requireLogin, async (req, res, 
     let selectedWine = await Wine.findById(req.body.wineId);
     res.render('wines-add', {selectedWine, cellarId: req.params.cellarId, wines, countryList: countryList.getNames()});
   } catch (error) {
-    console.log(error)
     next();
     return error;
   }
