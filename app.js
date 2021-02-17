@@ -88,4 +88,7 @@ app.use('/', api);
 const profile = require('./routes/profile.routes');
 app.use('/', profile);
 
+const opened = require('./routes/opened.routes');
+app.use('/', opened);
+
 module.exports = app;
