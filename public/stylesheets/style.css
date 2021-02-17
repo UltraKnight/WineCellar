@@ -85,6 +85,34 @@ li {
 textarea {
   max-height: 250px; }
 
+/* to test the profile photo */
+.container-photo {
+  width: 50%;
+  margin: 70px 25% 80%;
+  padding: 0;
+  display: table;
+  position: relative; }
+
+.container-choose {
+  width: 100%;
+  float: center; }
+
+.container-photo .container-choose .form-control {
+  margin-bottom: 20px; }
+
+label.header {
+  font-size: 16px;
+  font-weight: 500;
+  width: 215px;
+  color: grey;
+  margin-right: 10px;
+  text-align: justify;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-block;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+/* end of profile photo test */
 @media only screen and (max-width: 767px) {
   body {
     padding-top: 57px; } }
