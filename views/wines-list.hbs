@@ -10,7 +10,10 @@
                     <p>{{name}}</p>
                 </a>
 
-                    <img src="/images/top_view_bottle.png" height="100px" width="100px">
+                <img src="/images/top_view_bottle.png" height="100px" width="100px">
+                <a id="open-link" href="" {{!--href="/cellar/{{../cellar.id}}/wines/{{id}}/open"--}}
+                data-bs-toggle="modal" data-bs-target="#openWineModal" wine="{{this.name}}"
+                wine-type="{{type}}" wine-year="{{year}}" wine-id="{{id}}">Open</a>
 
                 <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
                     <i class="bi-pencil-square" style="font-size: 1.2rem; color: lightgreen;"></i>
@@ -26,6 +29,39 @@
     </div>
 </div>
 
+<!-- modal for open wine -->
+<div class="modal fade" id="openWineModal" tabindex="-1" aria-labelledby="openWineModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="openWineModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="open-form" class="form" method="POST">
+            <input type="hidden" name="year" id="wine-year" value=""> <!-- wine year -->
+            <input type="hidden" name="type" id="wine-type" value=""> <!-- wine type -->
+            <input type="hidden" name="name" id="wine" value=""> <!-- wine name -->
+
+          <div class="mb-3">
+            <label for="event" class="col-form-label">Event:</label>
+            <textarea class="form-control" name="event" id="event"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="open-date">Opened at:</label>
+            <input type="date" name="openingDate" id="open-date">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" form="open-form" class="btn btn-danger">Open this wine</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal for open wine -->
 <script>
     let max = {{cellar.capacity}} - {{cellar.wines.length}};
     let container = document.getElementById('grid-container');
@@ -42,4 +78,32 @@
             `;
         container.appendChild(div);
     }
+
+    let openModal = document.getElementById('openWineModal');
+        openModal.addEventListener('shown.bs.modal', function (event) {
+
+        // Button that triggered the modal
+        let anchorElem = event.relatedTarget
+
+        // Extract info from attributes
+        let wine = anchorElem.getAttribute('wine');
+        let wineYear = anchorElem.getAttribute('wine-year');
+        let wineType = anchorElem.getAttribute('wine-type');
+        let wineId = anchorElem.getAttribute('wine-id');
+
+        let modalTitle = openModal.querySelector('.modal-title');
+        let modalBodyInput = openModal.querySelector('.modal-body input');
+        
+        openModal.querySelector('#wine').value = wine;
+        openModal.querySelector('#wine-year').value = wineYear;
+        openModal.querySelector('#wine-type').value = wineType;
+        openModal.querySelector('#open-form').setAttribute('action', `/cellars/{{cellar.id}}/wines/${wineId}/open`);
+
+        modalTitle.textContent = 'Opening ' + wine;
+        modalBodyInput.value = '';
+        });
+        
+        openModal.addEventListener('hidden.bs.modal', function (event) {
+            openModal.querySelector('.form').reset();
+        });
 </script>

@@ -60,6 +60,17 @@ a {
   justify-content: flex-start;
 }
 
+#open-link {
+  position: absolute;
+  bottom: 8px;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  &:hover {
+    text-shadow: 0 0 5px black;
+  }
+}
+
 .edit-icon {
   position: absolute;
   left: 10px;

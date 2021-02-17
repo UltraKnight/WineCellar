@@ -5,6 +5,7 @@
 const express = require('express');
 const Cellar = require('../models/Cellar.model');
 const Wine = require('../models/Wine.model');
+const Opened = require('../models/Opened.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 const countryList = require('country-list');
@@ -110,6 +111,28 @@ router.post('/cellars/:cellarId/wines/:wineId/delete', requireLogin, async (req,
 
 //open wine
 //no implemented
+router.post('/cellars/:cellarId/wines/:wineId/open', requireLogin, async (req, res, next) => {
+  // try {
+  //   let cellarId = req.params.cellarId;
+  //   let wineId = req.params.wineId;
+  //   let {name, event, year, openingDate, type} = req.body;
+  //   //remove wine from collecion
+  //   //await Wine.findByIdAndDelete(wineId);
+  //   //remove this wine from Cellar
+  //   await Cellar.findByIdAndUpdate(cellarId, {$pull: { wines: wineId}});
+  //   await Opened.create({
+  //     name,
+  //     event,
+  //     year,
+  //     openingDate,
+  //     type
+  //   });
+  //   res.render(`opened`);
+  // } catch (error) {
+  //   next();
+  //   return error;
+  // }
+});
 
 //update wine form
 router.get('/cellars/:cellarId/wines/:wineId/edit', requireLogin, async (req, res, next) => {
