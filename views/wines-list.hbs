@@ -14,16 +14,17 @@
                 <a class="open-link" href="" {{!--href="/cellar/{{../cellar.id}}/wines/{{id}}/open"--}}
                 data-bs-toggle="modal" data-bs-target="#openWineModal" data-bs-wine="{{this.name}}"
                 data-bs-type="{{type}}" data-bs-year="{{year}}" data-bs-id="{{id}}">Open</a>
-
-                <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
-                    <i class="bi-pencil-square" style="font-size: 1.2rem; color: lightgreen;"></i>
-                </a>
-
-                <form class="background-light" action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
-                    <button class="delete-icon border-0 bg-transparent">
-                        <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
-                    </button>
-                </form>
+                {{!-- you can only edit or delete a wine if you created it --}}
+                {{#ifEq createdBy ../session.currentUser._id}}
+                  <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
+                      <i class="bi-pencil-square" style="font-size: 1.2rem; color: lightgreen;"></i>
+                  </a>
+                {{/ifEq}}
+                  <form class="background-light" action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
+                      <button class="delete-icon border-0 bg-transparent">
+                          <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
+                      </button>
+                  </form>
             </div> 
         {{/each}}
     </div>

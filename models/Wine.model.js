@@ -6,6 +6,10 @@ const wineSchema = new Schema ({
         type: String,
         required: [true, 'You need to give a name to your wine']
     },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User' //Relates to the User model
+    },
     country: String,
     year: Number,
     annotations:{
