@@ -11,9 +11,9 @@
                 </a>
 
                 <img src="/images/top_view_bottle.png" height="100px" width="100px">
-                <a id="open-link" href="" {{!--href="/cellar/{{../cellar.id}}/wines/{{id}}/open"--}}
-                data-bs-toggle="modal" data-bs-target="#openWineModal" wine="{{this.name}}"
-                wine-type="{{type}}" wine-year="{{year}}" wine-id="{{id}}">Open</a>
+                <a class="open-link" href="" {{!--href="/cellar/{{../cellar.id}}/wines/{{id}}/open"--}}
+                data-bs-toggle="modal" data-bs-target="#openWineModal" data-bs-wine="{{this.name}}"
+                data-bs-type="{{type}}" data-bs-year="{{year}}" data-bs-id="{{id}}">Open</a>
 
                 <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
                     <i class="bi-pencil-square" style="font-size: 1.2rem; color: lightgreen;"></i>
@@ -49,6 +49,7 @@
           </div>
 
           <div class="mb-3">
+            <p style="font-size: 0.7rem" class="m-1">No date means today</p>
             <label for="open-date">Opened at:</label>
             <input type="date" name="openingDate" id="open-date">
           </div>
@@ -80,19 +81,16 @@
     }
 
     let openModal = document.getElementById('openWineModal');
-        openModal.addEventListener('shown.bs.modal', function (event) {
-
+        openModal.addEventListener('show.bs.modal', function (event) {
         // Button that triggered the modal
-        let anchorElem = event.relatedTarget
-
+        let anchorElem = event.relatedTarget;
         // Extract info from attributes
-        let wine = anchorElem.getAttribute('wine');
-        let wineYear = anchorElem.getAttribute('wine-year');
-        let wineType = anchorElem.getAttribute('wine-type');
-        let wineId = anchorElem.getAttribute('wine-id');
+        let wine = anchorElem.getAttribute('data-bs-wine');
+        let wineYear = anchorElem.getAttribute('data-bs-year');
+        let wineType = anchorElem.getAttribute('data-bs-type');
+        let wineId = anchorElem.getAttribute('data-bs-id');
 
         let modalTitle = openModal.querySelector('.modal-title');
-        let modalBodyInput = openModal.querySelector('.modal-body input');
         
         openModal.querySelector('#wine').value = wine;
         openModal.querySelector('#wine-year').value = wineYear;
@@ -100,7 +98,6 @@
         openModal.querySelector('#open-form').setAttribute('action', `/cellars/{{cellar.id}}/wines/${wineId}/open`);
 
         modalTitle.textContent = 'Opening ' + wine;
-        modalBodyInput.value = '';
         });
         
         openModal.addEventListener('hidden.bs.modal', function (event) {

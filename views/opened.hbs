@@ -1,4 +1,34 @@
-<h1>opened wines</h1>
-<h6>{{opened.name}} - {{opened.year}} - {{opened.type}}</h6>
-<h6>{{opened.event}}</h6>
-<h6>{{opened.openingDate}}</h6>
+<script>
+  function insertDate(date) {
+    let dateFromDb = new Date(date);
+    let div = document.querySelector('.opened');
+    let newP = document.createElement('p');
+
+    let dd = dateFromDb.getDate();
+    let mm = dateFromDb.getMonth()+1;
+    let yyyy = dateFromDb.getFullYear();
+    dd = dd < 10 ? '0'+dd : dd;
+    mm = mm < 10 ? '0'+mm : mm;
+
+    let formatedDate = `${yyyy}-${mm}-${dd}`;
+    newP.classList.add('shaded');
+    newP.innerHTML = '<span class="fw-bold">Opened at:</span> ' + formatedDate;
+    div.appendChild(newP);
+  }
+</script>
+
+<div class="container-fluid container-general container-wine">
+    <div class="row">
+        <div class="opened col-md-6 mt-4 text-light">
+            <h4 class="mb-3">Memories</h4>
+            {{#each opened}}
+              <p class="fw-bold shaded">{{name}} - {{year}} - {{type}}</p>
+              <p class="shaded"><span class="fw-bold">Event:</span> {{event}}</p>
+              <script>
+                insertDate(`{{openingDate}}`);
+              </script>
+              <hr>
+            {{/each}}
+        </div>
+    </div>
+</div>

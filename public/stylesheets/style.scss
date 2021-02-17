@@ -60,7 +60,7 @@ a {
   justify-content: flex-start;
 }
 
-#open-link {
+.open-link {
   position: absolute;
   bottom: 8px;
   color: white;
@@ -83,7 +83,7 @@ a {
   bottom: 8px;
 }
 
-footer, nav, .container-profile {
+footer, nav, .container-opaque {
   background-color: rgb(53, 0, 0);
 }
 

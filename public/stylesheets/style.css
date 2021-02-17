@@ -49,13 +49,13 @@ a {
   flex-wrap: wrap;
   justify-content: flex-start; }
 
-#open-link {
+.open-link {
   position: absolute;
   bottom: 8px;
   color: white;
   font-size: 20px;
   text-decoration: none; }
-  #open-link:hover {
+  .open-link:hover {
     text-shadow: 0 0 5px black; }
 
 .edit-icon {
@@ -68,7 +68,7 @@ a {
   right: 5px;
   bottom: 8px; }
 
-footer, nav, .container-profile {
+footer, nav, .container-opaque {
   background-color: #350000; }
 
 .title, .shaded {
