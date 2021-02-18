@@ -71,9 +71,9 @@ router.post('/profile/update-profile-pic', fileUpload.single('image'), (req, res
   
   User.findByIdAndUpdate((req.session.currentUser._id), {
       $set:{imageURL: fileUrlOnCloudinary
-  }}).then((user) => {
-    req.session.currentUser = user;
-    res.redirect('/');
+  }}).then(() => {
+    req.session.currentUser.imageURL = fileUrlOnCloudinary;
+    res.redirect('/profile');
   });
 });
 
