@@ -33,6 +33,12 @@ router.post('/profile/delete', requireLogin, async (req, res, next) => {
 router.post('/profile/:id/new-username', requireLogin, async (req, res, next) => {
   try {
     let {username} = req.body;
+
+    if(!username) {
+      res.render('profile', {user: req.session.currentUser, errorMessage: 'Username can\'t be empty!'});
+      return;
+    }
+
     if (username === req.session.currentUser.username) {
       res.redirect('/profile');
       return;

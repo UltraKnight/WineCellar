@@ -31,5 +31,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     {{/if}}
+
+    {{#if achievement}}
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading d-inline">Well done!</h4>
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+        <p>You've got your first achievement: <strong>Wine-friendly</strong></p>
+        <hr>
+        <p class="mb-0"> Take a look at your conquests in the achievements top bar's option</p>
+      </div>
+    {{/if}}
   </div>
 </div>

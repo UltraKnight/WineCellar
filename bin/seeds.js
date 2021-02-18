@@ -3,10 +3,12 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Wine = require('../models/Wine.model');
 const User = require('../models/User.model');
+const Achievement = require('../models/Achievement.model');
 require('../configs/db.config');
 
 let wineKeeperId;
 let wines;
+let achievements;
 
 async function createWineKeeperUser() {
   try {
@@ -215,22 +217,46 @@ function createArray() {
   ];
 }
 
+function createArrayAchievements() {
+  achievements = [
+    {
+      name: 'Wine-friendly',
+      description: 'Become a user of WineKeeper',
+      imageURL: '/images/achievements/wine-friendly.jpg',
+      users: []
+    }
+  ];
+}
+
 async function createWines() {
     try {
         await Wine.create(wines);
         console.log('Wines inserted!');
-        mongoose.connection.close();
     } catch (error) {
         console.log(`Error while inserting wines ${error}`);
     }
+}
+
+async function createAchievements() {
+  try {
+    await Achievement.create(achievements);
+    console.log('Achievements inserted!');
+  } catch (error) {
+    console.log(`Error while creating achievements ${error}`);
+  }
 }
 
 async function populateDB() {
   try {
     await createWineKeeperUser();
     await getWineKeeperId();
+    
     await createArray();
     await createWines();
+    
+    await createArrayAchievements();
+    await createAchievements();
+    mongoose.connection.close();
   } catch (error) {
     console.log(`Error: ${error}`);
   }
