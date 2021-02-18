@@ -48,14 +48,14 @@ app.use(
   session({
       secret: process.env.SESSION_SECRET,
       cookie: {
-          maxAge: 60000,
-          sameSite: true,
+          maxAge: 60 * 60 * 24 * 1000,
+          sameSite: false,
           httpOnly: true
       },
       rolling: true,
       store: new MongoStore({
           mongooseConnection: mongoose.connection,
-          ttl: 60 * 60 * 24
+          //ttl: 60 * 60 * 24
       })
   })
 );
