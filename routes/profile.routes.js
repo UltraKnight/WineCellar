@@ -58,20 +58,21 @@ router.post('/profile/:id/new-username', requireLogin, async (req, res, next) =>
 /* to test cloudinary */
 //add profile photo
 
-router.get('/profile/create', (req, res) => {
+router.get('/profile/update-profile-pic', (req, res) => {
   res.render('profile-create'); 
 });
 
 
-router.post('/profile/create', fileUpload.single('image'), (req, res) => {
+router.post('/profile/update-profile-pic', fileUpload.single('image'), (req, res) => {
   //pass middleware . The 'image' on sigle comes from the input image on "FIND PLACE"
-  const { title, description } = req.body;
+  //const { title, description } = req.body;
   const fileUrlOnCloudinary = req.file.path;
   //first upload image from cloudinary with the name from the form
   
-  User.create({
-    imageUrl: fileUrlOnCloudinary
-  }).then(() => {
+  User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{imageURL: fileUrlOnCloudinary
+  }}).then((user) => {
+    req.session.currentUser = user;
     res.redirect('/');
   });
 });
