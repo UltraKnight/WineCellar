@@ -1,94 +1,102 @@
-<div class="container-fluid container-general container-opaque">
+<div class="container-fluid container-general container-wine">
     <div class="col-md-4 offset-md-4 text-light">
         <div class="text-center">
-            <h1 class="title" id="app-name">{{title}}</h1>
-            <h5 class="title">My Profile</h5>
-        </div>
-        <form class="mb-3" action="/profile/{{user._id}}/new-username" method="POST">
-            <div class="mb-3">
-                <label class="form-label shaded" for="username">Username</label>
-                <input class="form-control" type="text" name="username" id="username" value="{{user.username}}">
+            <h1 class="title shaded" id="app-name">{{title}}</h1>
+            <h3 class="title shaded mb-3">My Profile</h3>
+            {{#if message}}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <button id="btn-update-username" class="btn btn-danger btn-sm" type="submit" disabled>Update Username</button>
-        </form>
+            {{/if}}
+            {{#if errorMessage}}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{errorMessage}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {{/if}}
+        </div>
 
-        {{#if message}}
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{message}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {{/if}}
-        {{#if errorMessage}}
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{errorMessage}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {{/if}}
-
-<!-- Profile pic test cloudinary -->
-    <img src="{{user.imageURL}}" width="150px">
-    <form action='/profile/update-profile-pic' method="POST" enctype="multipart/form-data">
-        <input type='file' name='image'/>
-        <input type="submit">
-    </form>
-    
-  <!--to add friend button-->
-                 <form action="/profile/add" method="POST">
-                    <input type="hidden" name="id" value="{{user._id}}">
-                    <button id="btn-add-username" class="btn btn-danger btn-sm" type="submit">Add Wine Friend</button>
+        <!-- Profile pic cloudinary -->
+        <div class="container-fluid d-flex justify-content-between align-items-start">
+            <div class="me-3">
+                <img src="{{user.imageURL}}" width="150px" class="mb-3">
+            </div>
+            <div class="flex-grow-1">
+                <form class="mb-3" action="/profile/{{user._id}}/new-username" method="POST">
+                    {{!-- <label class="form-label shaded" for="username">Username</label> --}}
+                    <div class="mb-3">
+                        <label for="username" class="form-label shaded">Username</label>
+                        <input class="form-control" type="text" name="username" id="username" value="{{user.username}}">
+                    </div>
+                    <button id="btn-update-username" class="btn btn-danger btn-sm" type="submit" disabled>Update Username</button>
                 </form>
-             <!-- end to add a friend -->  
-             </div> 
-        
-        <h5>Email: {{user.email}}</h5>
-
-        <!-- test for selector for favorite wines and so on -->
-         <div>
-             <label class="form-label-check" for="wine-list">My Favorite Types of Wine:</label>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Red</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="flexSwitchCheckChecked">White</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Sparkling</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Dessert</label>
-                </div>
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Green</label>
-                </div>
-                <div class="form-check form-switch">
-                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                     <label class="form-check-label" for="flexSwitchCheckChecked">Porto</label>
-                </div>
-             </div>
-        <!-- test end -->
+            </div>
+        </div>
+        <form class="mb-3" action='/profile/update-profile-pic' method="POST" enctype="multipart/form-data">
+            <div class="input-group input-group-sm">
+                <input class="form-control" type='file' name='image'/>
+                <button class="btn btn-danger" id="btn-change-image" type="submit">Change Image</button>
+            </div>
+        </form>
     
-    <!-- Test the wineLover selection -->
-    <label class="form-label-wine-lover" for="wine-list">WineLover Meter:</label>
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open to choose</option>
-            <option value="1">Wine Enthusiast (Love wine) </option>
-            <option value="2">Wine&Social (Drink socially)</option>
-            <option value="3">Grape Lover (Prefer grapes juice but drinks a glass once in a while)</option>
-        </select>
-    <!-- End of WineLove Selection test -->
-<!-- the delete button -->
+        <h5 class="mb-3 shaded">Email: {{user.email}}</h5>
+
+        <!--to add friend button-->
+        <form class="mb-3" action="/profile/add" method="POST">
+            <input type="hidden" name="id" value="{{user._id}}">
+            <button id="btn-add-username" class="btn btn-danger btn-sm" type="submit">Add Wine Friend</button>
+        </form>
+        <!-- end to add a friend -->  
+    
+        <!-- test for selector for favorite wines and so on -->
+        <div class="mb-3">
+            <label class="form-label-check shaded" for="wine-list">My Favorite Types of Wine:</label>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Red</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">White</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Sparkling</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Dessert</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Green</label>
+            </div>
+            <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Porto</label>
+            </div>
+        </div>
+        <!-- test end -->
+
+        <!-- Test the wineLover selection -->
+        <div class="mb-3">
+            <label class="form-label wine-lover" for="wine-list">WineLover Meter:</label>
+            <select id="wine-list" class="form-select">
+                <option selected disabled>Open to choose</option>
+                <option value="1">Wine Enthusiast (Love wine) </option>
+                <option value="2">Wine&Social (Drink socially)</option>
+                <option value="3">Grape Lover (Prefer grapes juice but drinks a glass once in a while)</option>
+            </select>
+        </div>
+        <!-- End of WineLove Selection test -->
+            
+        <!-- the delete button -->
         <form action="/profile/delete" method="POST">
             <input type="hidden" name="id" value="{{user._id}}">
-            <button id="btn-delete-username" class="btn btn-danger btn-sm" type="submit">Delete Username</button>
+            <button id="btn-delete-username" class="btn btn-danger btn-sm" type="submit">Delete Account</button>
         </form>
     </div>
-
-</div>
 </div>
 
 <script>

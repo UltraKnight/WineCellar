@@ -65,7 +65,11 @@ router.get('/profile/update-profile-pic', (req, res) => {
 
 router.post('/profile/update-profile-pic', fileUpload.single('image'), (req, res) => {
   //pass middleware . The 'image' on sigle comes from the input image on "FIND PLACE"
-  //const { title, description } = req.body;
+  if(! req.file) {
+    res.redirect('/profile');
+    return;
+  }
+
   const fileUrlOnCloudinary = req.file.path;
   //first upload image from cloudinary with the name from the form
   
