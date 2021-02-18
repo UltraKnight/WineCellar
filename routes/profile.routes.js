@@ -1,13 +1,15 @@
 const express = require('express');
 const User = require('../models/User.model');
+const Achievement = require('../models/Achievement.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 const fileUpload = require('../configs/cloudinary');
 
 //see user data
 router.get('/profile', requireLogin, async (req, res, next) => {
+  let achievement = req.query.achievement || null;
   try {
-    res.render('profile', {user : req.session.currentUser});
+    res.render('profile', {user : req.session.currentUser, achievement});
   } catch (error) {
     next();
     return error;
@@ -78,8 +80,15 @@ router.post('/profile/update-profile-pic', fileUpload.single('image'), async (re
     req.session.currentUser.imageURL = fileUrlOnCloudinary;
     
     if(!req.session.currentUser.picChanged) {
-      await User.findByIdAndUpdate(req.session.currentUser._id, {picChanged : true});
-      req.session.currentUser.picChanged = true;
+      const newUser = await User.findByIdAndUpdate(req.session.currentUser._id, {picChanged : true}, {new:true});
+      req.session.currentUser = newUser;
+      //achievement
+      let achievementName = 'Waiter, another shot, please!';
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});      
+      let achievement = encodeURIComponent(achievementName);
+      res.redirect(`/profile/?achievement=` + achievement);
+      //achievement
+      return;
     }
 
     res.redirect('/profile');

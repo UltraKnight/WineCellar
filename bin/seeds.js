@@ -222,7 +222,73 @@ function createArrayAchievements() {
     {
       name: 'Wine-friendly',
       description: 'Become a user of WineKeeper',
-      imageURL: '/images/achievements/wine-friendly.jpg',
+      imageURL: '/images/achievements/wine-friendly.png',
+      users: []
+    },
+    {
+      name: 'Keep it safe',
+      description: 'Now you can keep the new wines safe in your wine cellar',
+      imageURL: '/images/achievements/keep-it-safe.png',
+      users: []
+    },
+    {
+      name: 'Red-lover',
+      description: 'Create 10 red wines',
+      imageURL: '/images/achievements/red-lover.png',
+      users: []
+    },
+    {
+      name: 'White-lover',
+      description: 'Create 10 white wines',
+      imageURL: '/images/achievements/white-lover.png',
+      users: []
+    },
+    {
+      name: 'Rose-lover',
+      description: 'Create 10 rose wines',
+      imageURL: '/images/achievements/rose-lover.png',
+      users: []
+    },
+    {
+      name: 'Sparkling-lover',
+      description: 'Create 10 sparkling wines',
+      imageURL: '/images/achievements/sparkling-lover.png',
+      users: []
+    },
+    {
+      name: 'Dessert-lover',
+      description: 'Create 10 dessert wines',
+      imageURL: '/images/achievements/dessert-lover.png',
+      users: []
+    },
+    {
+      name: 'Green-lover',
+      description: 'Create 10 green wines',
+      imageURL: 'green-lover',
+      users: []
+    },
+    {
+      name: 'Porto-lover',
+      description: 'Create 10 porto wines',
+      imageURL: '/images/achievements/porto-lover.png',
+      users: []
+    },
+    {
+      name: 'My precious!',
+      description: 'Added your first wine to a wine cellar',
+      imageURL: '/images/achievements/my-precious.png',
+      users: []
+    },
+    {
+      name: 'Wine-cannon',
+      description: 'Wow! You already created 20 wines!',
+      imageURL: '/images/achievements/wine-cannon.png',
+      users: []
+    },
+    {
+      name: 'Waiter, another shot, please!',
+      description: 'Change your picture profile for the first time',
+      imageURL: '/images/achievements/another-shot.png',
       users: []
     }
   ];

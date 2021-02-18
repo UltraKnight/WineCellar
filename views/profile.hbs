@@ -4,15 +4,26 @@
             <h1 class="title shaded" id="app-name">{{title}}</h1>
             <h3 class="title shaded mb-3">My Profile</h3>
             {{#if message}}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{message}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{message}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             {{/if}}
+
             {{#if errorMessage}}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{errorMessage}}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{errorMessage}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {{/if}}
+
+            {{#if achievement}}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading d-inline">Well done!</h4>
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                <p>You've got a new achievement: <strong>{{achievement}}</strong></p>
+                <hr>
+                <p class="mb-0"> Take a look at your conquests in the <a href="/achievements">achievements</a> top bar's option</p>
             </div>
             {{/if}}
         </div>

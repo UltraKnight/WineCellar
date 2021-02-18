@@ -58,11 +58,18 @@ const userSchema = new Schema ({
           default: 0
         },
       },
+
       createdCellars: {
         type: Number,
         default: 0
       },
+
       picChanged: {
+        type: Boolean,
+        default: false
+      },
+
+      addedFirst: {
         type: Boolean,
         default: false
       }

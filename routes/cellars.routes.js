@@ -6,14 +6,16 @@
 const express = require('express');
 const Cellar = require('../models/Cellar.model');
 const User = require('../models/User.model');
+const Achievement = require('../models/Achievement.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 
 //get all cellars
 router.get('/cellars', requireLogin, async (req, res, next) => {
+  let achievement = req.query.achievement || null;
   try {
     let cellars = await Cellar.find({createdBy:req.session.currentUser._id});
-    res.render('cellars-list', {cellars});
+    res.render('cellars-list', {cellars, achievement});
   } catch (error) {
     console.log(error);
     next();
@@ -40,7 +42,20 @@ router.post('/cellars', requireLogin, async (req, res) => {
       createdBy,
     });
 
-    await User.findByIdAndUpdate(createdBy, {$inc: {createdCellars : 1}});
+    //new: true -> returns the changed document
+    const newUser = await User.findByIdAndUpdate(createdBy, {$inc: {createdCellars : 1}}, {new: true});
+    req.session.currentUser = newUser;
+
+    //Achievement
+    if(newUser.createdCellars === 1) {
+      const achievementName = 'Keep it safe';
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
+
+      let achievement = encodeURIComponent(achievementName);
+      res.redirect('/cellars/?achievement=' + achievement);
+      return;
+    }
+    //Achievement
 
     res.redirect('/cellars');
   } catch (error) {

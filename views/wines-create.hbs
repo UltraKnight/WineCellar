@@ -4,7 +4,7 @@
         <h1 class="title" id="app-name">{{title}}</h1>
         <h5 class="title">Create a Wine</h5>
     </div>
-        <form action="/cellars/{{cellarId}}/wines" method="POST">
+        <form id="new-wine-form" action="/cellars/{{cellarId}}/wines" method="POST">
             <div class="mb-3">
                 <label class="form-label" for="name">Name</label>
                 <input class="form-control" type="text" name="name" id="name" placeholder="Insert wine's name here" required>
@@ -38,7 +38,7 @@
 
             <div class="mb-3">
                 <label class="form-label" for="type-list">Type</label>
-                <select class="form-select" name="type" id="type-list">
+                <select class="form-select" name="type" id="type-list" required>
                     <option value="" disabled selected>Choose the type of your wine</option>
                     <option value="red">red</option>
                     <option value="white">white</option>
@@ -111,6 +111,26 @@
         let elemen = document.getElementById('year');
         elemen.setAttribute("max", year);
     }
+
+    //avoid user to let wine type empty
+    document.getElementById('new-wine-form').addEventListener('submit', e => {
+        typeElem = event.target.elements.type;
+        nameElem = event.target.elements.name;
+
+        if(! typeElem.value) {
+            alert('You must choose a type for your wine!');
+            typeElem.focus();
+            e.preventDefault();
+            return;
+        }
+
+        if(! nameElem.value) {
+            alert('You must give a name to your wine!');
+            nameElem.focus();
+            e.preventDefault();
+            return;
+        }
+    });
 
     maxYear();
     maxDate();

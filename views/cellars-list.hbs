@@ -1,5 +1,14 @@
 <div class="container-fluid container-general container-cellar p-0">
     <div class="col-md-6 table-responsive-sm">
+            {{#if achievement}}
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading d-inline">Well done!</h4>
+                <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
+                <p>You've got a new achievement: <strong>{{achievement}}</strong></p>
+                <hr>
+                <p class="mb-0"> Take a look at your conquests in the <a href="/achievements">achievements</a> top bar's option</p>
+            </div>
+            {{/if}}
         <table class="table text-light table-striped cellars"> <!--style="width: 98vw;"-->
             <tr class="text-light align-middle">
                 <th class="fs-2" colspan="3">My Wine Cellars</th>

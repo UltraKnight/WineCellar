@@ -18,7 +18,8 @@ const wineSchema = new Schema ({
     },
     type: {
         type: String,
-        enum: ['red', 'white', 'rose', 'sparkling', 'dessert', 'green', 'porto']
+        enum: ['red', 'white', 'rose', 'sparkling', 'dessert', 'green', 'porto'],
+        required: [true, 'Your wine must have a type']
     },
     blend: String,
     abv: {

@@ -7,17 +7,19 @@ const Cellar = require('../models/Cellar.model');
 const Wine = require('../models/Wine.model');
 const Opened = require('../models/Opened.model');
 const User = require('../models/User.model');
+const Achievement = require('../models/Achievement.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 const countryList = require('country-list');
 
 //get all wines
 router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
+  let achievement = req.query.achievement || null;
   try {
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate('wines');
     //Get wines that are in this cellar
-    res.render('wines-list', {cellar});
+    res.render('wines-list', {cellar, achievement});
   } catch (error) {
    next();
    return error;
@@ -31,8 +33,7 @@ router.get('/cellars/:cellarId/wines/add', requireLogin, async (req, res, next) 
     let wines = await Wine.find({createdBy: arrUsers});
     res.render('wines-add', {cellarId: req.params.cellarId, wines, countryList: countryList.getNames()});
   } catch (error) {
-    console.log(error);
-    //next();
+    next();
     return error;
   }
 });
@@ -58,6 +59,20 @@ router.post('/cellars/:cellarId/wines/add', requireLogin, async (req, res) => {
 
   try{
     await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: wineId}});
+
+    //achievement
+    let user = req.session.currentUser;
+    if(! user.addedFirst) {
+      await User.findByIdAndUpdate(user._id, {addedFirst: true});
+      const achievementName = 'My precious!';
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: user._id}});
+
+      let achievement = encodeURIComponent(achievementName);
+      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      return;
+    }
+    //achievement
+
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
     res.render('wines-create');
@@ -68,7 +83,7 @@ router.post('/cellars/:cellarId/wines/add', requireLogin, async (req, res) => {
 router.get('/cellars/:cellarId/wines/create', requireLogin, async (req, res) => {
   res.render('wines-create', {cellarId: req.params.cellarId, countryList: countryList.getNames()});
 });
-                  
+
 //create wine
 router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
   //name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure
@@ -93,8 +108,50 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
     });
 
     await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: createdWine.id}});
-    await User.findByIdAndUpdate(createdBy, {$inc: {[`createdWines.${type}`] : 1, [`createdWines.total`] : 1}});
+    const newUser = await User.findByIdAndUpdate(createdBy, {$inc: {[`createdWines.${type}`] : 1, [`createdWines.total`] : 1}}, {new:true});
+    req.session.currentUser = newUser;
     
+    //achievement
+    if(! newUser.addedFirst) {
+      await User.findByIdAndUpdate(newUser.id, {addedFirst: true});
+      const achievementName = 'My precious!';
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
+
+      let achievement = encodeURIComponent(achievementName);
+      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      return;
+    }
+    //achievement
+
+    //achievement
+    //achievements depending on the wine type
+    //every 10 wines of each type will trigger an achievement
+    if(newUser.createdWines[type] === 10) {
+      //capitalize the first letter of the type (red becomes Red)
+
+      let achievementName = `${type.charAt(0).toUpperCase() + type.slice(1)}-lover`;
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
+
+      //if both achievements happen at once
+      if(newUser.createdWines.total === 20) {
+        await Achievement.findOneAndUpdate({name: `Wine-cannon`}, {$push: {users: newUser.id}});
+        achievementName += ' and Wine-cannon';
+      }
+      let achievement = encodeURIComponent(achievementName);
+      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      return;
+    }
+    //achievement
+
+    if(newUser.createdWines.total === 20) {
+      const achievementName = `Wine-cannon`;
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
+
+      let achievement = encodeURIComponent(achievementName);
+      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      return;
+    }
+
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
     res.render('wines-create');
@@ -189,6 +246,7 @@ router.post('/cellars/:cellarId/wines/:wineId', requireLogin, async (req, res, n
       bottleSize,
       closure
     }});
+
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
     next();
