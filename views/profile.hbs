@@ -9,8 +9,24 @@
                 <label class="form-label shaded" for="username">Username</label>
                 <input class="form-control" type="text" name="username" id="username" value="{{user.username}}">
             </div>
-<!-- Test profile pic-->
-        <link rel="stylesheet" href="/stylesheets/style.css">
+            <button id="btn-update-username" class="btn btn-danger btn-sm" type="submit" disabled>Update Username</button>
+        </form>
+
+        {{#if message}}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{message}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {{/if}}
+        {{#if errorMessage}}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{errorMessage}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {{/if}}
+
+<!-- End of profile pic test -->
+         <link rel="stylesheet" href="/stylesheets/style.css">
 
             <div class="card">
                 <img src="/images/wines_bg.jpg" alt="John" style="width:100%">
@@ -22,18 +38,8 @@
                     <button id="btn-add-username" class="btn btn-danger btn-sm" type="submit">Add Wine Friend</button>
                 </form>
              <!-- end to add a friend -->  
+             </div> 
         
-            </div> 
-<!-- End of profile pic test -->
-
-            <button id="btn-update-username" class="btn btn-danger btn-sm" type="submit">Update Username</button>
-        </form>
-        {{#if message}}
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{message}}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        {{/if}}
         <h5>Email: {{user.email}}</h5>
 
         <!-- test for selector for favorite wines and so on -->
@@ -104,3 +110,10 @@
     </div>
 
 </div>
+</div>
+
+<script>
+    document.getElementById('username').addEventListener('keyup', (event) => {
+        document.getElementById('btn-update-username').disabled = false;
+    });
+</script>

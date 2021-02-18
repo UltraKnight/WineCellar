@@ -116,12 +116,12 @@ router.post('/cellars/:cellarId/wines/:wineId/delete', requireLogin, async (req,
 });
 
 //open wine
-//no implemented
 router.post('/cellars/:cellarId/wines/:wineId/open', requireLogin, async (req, res, next) => {
   try {
     let cellarId = req.params.cellarId;
     let wineId = req.params.wineId;
     let {name, event, year, openingDate, type} = req.body;
+    let createdBy = req.session.currentUser._id;
     //remove wine from collecion
     //await Wine.findByIdAndDelete(wineId);
     //remove this wine from Cellar
@@ -132,14 +132,16 @@ router.post('/cellars/:cellarId/wines/:wineId/open', requireLogin, async (req, r
         event,
         year,
         openingDate,
-        type
+        type,
+        createdBy
       });
     } else {
       await Opened.create({
         name,
         event,
         year,
-        type
+        type,
+        createdBy
       });
     }
     res.redirect(`/cellars/${cellarId}/wines`);
@@ -197,6 +199,7 @@ router.get('/cellars/:cellarId/wines/:wineId', requireLogin, async (req, res) =>
   let wineId = req.params.wineId;
   try {
       let wine = await Wine.findById(wineId);
+
       res.render('wines-details', {wine, cellarId : req.params.cellarId});
   } catch (error) {
     res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});

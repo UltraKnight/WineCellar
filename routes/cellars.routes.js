@@ -9,18 +9,19 @@ const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 
 //get all cellars
-router.get('/cellars', requireLogin, async (_req, res, next) => {
+router.get('/cellars', requireLogin, async (req, res, next) => {
   try {
-    let cellars = await Cellar.find();
+    let cellars = await Cellar.find({createdBy:req.session.currentUser._id});
     res.render('cellars-list', {cellars});
   } catch (error) {
+    console.log(error);
     next();
     return error;
   }
 });
 
 //create form
-router.get('/cellars/create', requireLogin, async (_req, res) => {
+router.get('/cellars/create', requireLogin, async (req, res) => {
   res.render('cellars-create');
 });
 
@@ -28,12 +29,14 @@ router.get('/cellars/create', requireLogin, async (_req, res) => {
 router.post('/cellars', requireLogin, async (req, res) => {
   //wines is empty on creation
   let {name, place, /*wines,*/ capacity} = req.body;
+  let createdBy = req.session.currentUser._id;
   try {
     await Cellar.create({
       name,
       place,
       wines: [],
-      capacity
+      capacity,
+      createdBy,
     });
     res.redirect('/cellars');
   } catch (error) {
@@ -45,6 +48,13 @@ router.post('/cellars', requireLogin, async (req, res) => {
 router.post('/cellars/:id/delete', requireLogin, async (req, res, next) => {
   try {
     let id = req.params.id;
+    let cellar = await Cellar.findById(id);
+
+    if(cellar.createdBy != req.session.currentUser._id) {
+      res.redirect('/cellars');
+      return;
+    }
+
     await Cellar.findByIdAndDelete(id);
     res.redirect('/cellars');
   } catch (error) {
@@ -73,6 +83,12 @@ router.post('/cellars/:id', requireLogin, async (req, res, next) => {
       res.render('cellars-edit', {cellar, errorMessage: 'You can\'t have more wines than free spaces in your cellar.'});
       return;
     }
+
+    if(cellar.createdBy != req.session.currentUser._id) {
+      res.redirect('/cellars');
+      return;
+    }
+
     await Cellar.findByIdAndUpdate(req.params.id, {$set: {name, place, capacity}});
     res.redirect('/cellars');
   } catch (error) {
@@ -86,6 +102,12 @@ router.get('/cellars/:id', requireLogin, async (req, res) => {
   let id = req.params.id;
   try {
       let cellar = await Cellar.findById(id).populate('wines');
+
+      if(cellar.createdBy != req.session.currentUser._id) {
+        res.redirect('/cellars');
+        return;
+      }
+
       res.render('cellars-details', {cellar});
   } catch (error) {
     res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});

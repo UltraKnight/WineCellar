@@ -17,7 +17,11 @@ const cellarSchema = new Schema ({
     wines: [{
         type: Schema.Types.ObjectId,
         ref: 'Wine' //Relates to the Wine model
-    }]
+    }],
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'User' //Relates to the User model
+    }
 });
 
 module.exports = model('Cellar', cellarSchema);
