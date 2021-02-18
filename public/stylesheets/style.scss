@@ -71,6 +71,14 @@ a {
   }
 }
 
+#profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-size: cover;
+  margin-bottom: 20px;
+}
+
 .edit-icon {
   position: absolute;
   left: 10px;
@@ -131,5 +139,16 @@ textarea {
 @media only screen and (max-width: 767px) {
   body {
     padding-top: 57px;
+  }
+
+  #app-name {
+    font-size: 3rem;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  #profile-pic {
+    width: 70px;
+    height: 70px;
   }
 }
