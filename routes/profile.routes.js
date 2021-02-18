@@ -88,8 +88,29 @@ router.get('/profile', (req, res) => {
     res.render('user-list', { profile: user});
   });
 });
-
-
 /* cloudinary test end */
+
+
+//switch settings save
+router.get('/profile/favorite-wine-type', (req, res) => {
+  res.render('profile');
+});
+
+
+let checkbox = true;
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+  }}).then(() => {
+    req.session.currentUser.switch = true;
+    res.redirect('/profile');
+  });
+
+
+  
+});
+
+
 
 module.exports = router;

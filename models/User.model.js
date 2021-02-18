@@ -22,8 +22,9 @@ const userSchema = new Schema ({
         require: [true, 'Password is required']
       },
       
-      imageURL: String
-  });
-
+      imageURL: String,
       
+      switch: Boolean //for the switch on profile page 
+});
+
      module.exports = model('User', userSchema);

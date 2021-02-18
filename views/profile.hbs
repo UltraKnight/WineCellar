@@ -55,30 +55,35 @@
         <!-- test for selector for favorite wines and so on -->
         <div class="mb-3">
             <label class="form-label-check shaded" for="wine-list">My Favorite Types of Wine:</label>
+        <form class="checkbox" action="/profile/favorite-wine-type" method="POST">
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Red</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">White</label>
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">White</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">Sparkling</label>
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Sparkling</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                <label class="form-check-label" for="flexSwitchCheckChecked">Dessert</label>
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Dessert</label>
             </div>
             <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
                 <label class="form-check-label" for="flexSwitchCheckDefault">Green</label>
             </div>
             <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Porto</label>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Porto</label>
             </div>
+             <div class="form-check form-switch">
+                <button class="btn btn-danger" id="btn-change-image" type="submit">Add Choices</button>
+            </div>
+            </form>
         </div>
         <!-- test end -->
 
@@ -91,6 +96,7 @@
                 <option value="2">Wine&Social (Drink socially)</option>
                 <option value="3">Grape Lover (Prefer grapes juice but drinks a glass once in a while)</option>
             </select>
+            <button type="submit">Choose</button>
         </div>
         <!-- End of WineLove Selection test -->
             
@@ -107,3 +113,19 @@
         document.getElementById('btn-update-username').disabled = false;
     });
 </script>
+
+<!-- for the types of wine selector -->
+<!--
+<script>
+    function checkBox(){
+        checkbox.addEventListener('change', (e) => {
+            let list = checkbox.document.getElementById();
+            list = [...list];
+            list.forEach(checkbox) => {
+                checkbox.submit();
+              // findByIdAndUpdate();
+                ('disable', true);
+            }
+        });
+    }
+</script> -->                                                                                                                                                                                           
