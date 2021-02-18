@@ -25,6 +25,7 @@ a {
 
 .container-profile {
   background-image: url("/images/backgroundprofile.jpg");
+  background-attachment: fixed;
   background-position: top; }
 
 .container-achievements {
