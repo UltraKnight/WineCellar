@@ -38,10 +38,11 @@ router.post('/signup', async (req, res) => {
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
   const hashPass = bcrypt.hashSync(password, salt);
-  
+  const imageURL = "/images/profilepicturedefault3.png"; 
   try {
     const createdUser = await User.create({
         username,
+        imageURL, 
         email,
         password: hashPass
     });
