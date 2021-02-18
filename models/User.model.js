@@ -24,7 +24,50 @@ const userSchema = new Schema ({
       
       imageURL: String,
       
-      switch: Boolean //for the switch on profile page 
-});
+      switch: Boolean, //for the switch on profile page 
+    
+      createdWines: {
+        red: {
+          type: Number,
+          default: 0
+        },
+        white: {
+          type: Number,
+          default: 0
+        },
+        rose: {
+          type: Number,
+          default: 0
+        },
+        sparkling: {
+          type: Number,
+          default: 0
+        },
+        dessert: {
+          type: Number,
+          default: 0
+        },
+        green: {
+          type: Number,
+          default: 0
+        },
+        porto: {
+          type: Number,
+          default: 0
+        },
+        total: {
+          type: Number,
+          default: 0
+        },
+      },
+      createdCellars: {
+        type: Number,
+        default: 0
+      },
+      picChanged: {
+        type: Boolean,
+        default: false
+      }
+  });
 
-     module.exports = model('User', userSchema);
+module.exports = model('User', userSchema);

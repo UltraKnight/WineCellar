@@ -63,7 +63,7 @@ router.get('/profile/update-profile-pic', (req, res) => {
 });
 
 
-router.post('/profile/update-profile-pic', fileUpload.single('image'), (req, res) => {
+router.post('/profile/update-profile-pic', fileUpload.single('image'), async (req, res) => {
   //pass middleware . The 'image' on sigle comes from the input image on "FIND PLACE"
   if(! req.file) {
     res.redirect('/profile');
@@ -73,12 +73,19 @@ router.post('/profile/update-profile-pic', fileUpload.single('image'), (req, res
   const fileUrlOnCloudinary = req.file.path;
   //first upload image from cloudinary with the name from the form
   
-  User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{imageURL: fileUrlOnCloudinary
-  }}).then(() => {
+  try {
+    await User.findByIdAndUpdate((req.session.currentUser._id), {$set: {imageURL: fileUrlOnCloudinary} });
     req.session.currentUser.imageURL = fileUrlOnCloudinary;
+    
+    if(!req.session.currentUser.picChanged) {
+      await User.findByIdAndUpdate(req.session.currentUser._id, {picChanged : true});
+      req.session.currentUser.picChanged = true;
+    }
+
     res.redirect('/profile');
-  });
+  } catch (error) {
+    return error;
+  }
 });
 
 
