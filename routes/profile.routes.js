@@ -2,6 +2,7 @@ const express = require('express');
 const User = require('../models/User.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
+const fileUpload = require('../configs/cloudinary');
 
 //see user data
 router.get('/profile', requireLogin, async (req, res, next) => {
@@ -48,13 +49,36 @@ router.post('/profile/:id/new-username', requireLogin, async (req, res, next) =>
   }
 });
 
-/*
+/* to test cloudinary */
 //add profile photo
-router.get('/profile/:id/profile-photo', requirePhoto, async (req, res, next) => {
-  try {
-    let {imageURL} = req.body;
-    await User.
-  }
-})  */
+
+router.get('/profile/create', (req, res) => {
+  res.render('profile-create'); 
+});
+
+
+router.post('/profile/create', fileUpload.single('image'), (req, res) => {
+  //pass middleware . The 'image' on sigle comes from the input image on "FIND PLACE"
+  const { title, description } = req.body;
+  const fileUrlOnCloudinary = req.file.path;
+  //first upload image from cloudinary with the name from the form
+  
+  User.create({
+    imageUrl: fileUrlOnCloudinary
+  }).then(() => {
+    res.redirect('/');
+  });
+});
+
+
+router.get('/profile', (req, res) => {
+  User.find()
+  .then((user) => {
+    res.render('user-list', { profile: user});
+  });
+});
+
+
+/* cloudinary test end */
 
 module.exports = router;
