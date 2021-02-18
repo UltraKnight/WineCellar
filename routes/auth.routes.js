@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const User = require('../models/User.model');
+const Achievement = require('../models/Achievement.model');
 const bcrypt = require('bcrypt');
 const { /*gmail*/ outlook, mailOptions} = require('../configs/nodemailer.config'); //choose between gmail or outlook
 mailOptions.from = 'WINE CELLAR <vanderlei.i.martins@outlook.com>'; //change sender email here
@@ -37,13 +38,13 @@ router.post('/signup', async (req, res) => {
   const saltRounds = 10;
   const salt = bcrypt.genSaltSync(saltRounds);
   const hashPass = bcrypt.hashSync(password, salt);
-
+  
   try {
-      await User.create({
-          username,
-          email,
-          password: hashPass
-      });
+    const createdUser = await User.create({
+        username,
+        email,
+        password: hashPass
+    });
 
     mailOptions.to = email; //user email
     // send mail with defined transport object
@@ -54,7 +55,11 @@ router.post('/signup', async (req, res) => {
         console.log('Message sent: ' + info.response);
     });
 
-      res.redirect('/');
+        // achievement
+        await Achievement.findOneAndUpdate({name: 'Wine-friendly'}, {$push: {users: createdUser.id}});
+        // achievement
+
+        res.render('index', {achievement: true});
   } catch (err) {
       if(err.code === 11000) {
           res.render('auth/signup', {errorMessage: 'Username or e-mail already registered'});
@@ -80,7 +85,7 @@ router.post('/login', async (req, res) => {
 
     if(bcrypt.compareSync(password, user.password)) {
         req.session.currentUser = user;
-        res.redirect('/');
+        res.redirect('/cellars');
     } else {
         res.render('index', {errorMessage: 'Invalid username and password combination'});
     }

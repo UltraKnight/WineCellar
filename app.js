@@ -97,4 +97,7 @@ app.use('/', profile);
 const opened = require('./routes/opened.routes');
 app.use('/', opened);
 
+const achievement = require('./routes/achievement.routes');
+app.use('/', achievement);
+
 module.exports = app;

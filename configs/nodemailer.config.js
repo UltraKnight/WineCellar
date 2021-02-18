@@ -28,8 +28,8 @@ const gmail = nodemailer.createTransport({
 let mailOptions = {
   from: 'WINE CELLAR <vanderlei.i.martins@outlook.com>', // sender address (who sends)
   to: 'vandi.martins94@gmail.com', // list of receivers (who receives)
-  subject: 'Welcome to your Wine Cellar Manager', // Subject line
-  text: 'We want to thank you for registering in Wine Cellar', // plaintext body
+  subject: 'Welcome to WineKeeper - your Wine Cellar Manager', // Subject line
+  text: 'We want to thank you for registering in WineKeeper', // plaintext body
   //html: '<b>Hello world </b><br> This is the first email sent with Nodemailer in Node.js' // html body
 };
 
