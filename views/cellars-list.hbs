@@ -1,5 +1,5 @@
 <div class="container-fluid container-general container-cellar p-0">
-    <div class="col-md-6 table-responsive-sm">
+    <div class="table-responsive-sm cellars p-3">
             {{#if achievement}}
             <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading d-inline">Well done!</h4>
@@ -9,20 +9,17 @@
                 <p class="mb-0"> Take a look at your conquests in the <a href="/achievements">achievements</a> top bar's option</p>
             </div>
             {{/if}}
-        <table class="table text-light table-striped cellars"> <!--style="width: 98vw;"-->
-            <tr class="text-light align-middle">
-                <th class="fs-2" colspan="3">My Wine Cellars</th>
-                <th class="fs-4 text-end" colspan="2"><a href="/cellars/create">New Cellar</a></th>
-            </tr>
 
-            <tr class="fs-6 text-light">
+        <p class="fs-2 text-center mb-1">My Wine Cellars</p>
+        <table class="table text-light table-borderless"> <!--style="width: 98vw;"-->
+            <tr class="fs-6 text-light border-bottom">
                 <th>Name</th>
                 <th>Where is it?</th>
                 <th>Capacity</th>
-                <th class="text-center" colspan="2">Managing</th>
+                <th class="text-start" colspan="2">Managing</th>
             </tr>
             {{#each cellars}}
-                <tr class="text-light align-middle">
+                <tr class="text-light align-middle fs-6">
                     <td class="fw-bold"><a href="/cellars/{{id}}/wines">Enter the {{name}}</a></td>
                     <td>{{place}}</td>
                     <td>{{capacity}}</td>
@@ -39,6 +36,7 @@
                 </tr>
             {{/each}}
         </table>
+        <p class="fs-5" colspan="4"><a href="/cellars/create">New Cellar</a></p>
     </div>
 </div>
 
