@@ -23,6 +23,10 @@ a {
 .container-wine {
   background-image: url("/images/pouring_wine.jpg"); }
 
+.container-profile {
+  background-image: url("/images/backgroundprofile.jpg");
+  background-position: top; }
+
 .wine-container {
   display: flex;
   align-items: center;

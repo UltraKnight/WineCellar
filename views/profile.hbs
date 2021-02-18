@@ -1,5 +1,5 @@
-<div class="container-fluid container-general container-wine">
-    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4 text-light">
+<div class="container-fluid container-general container-profile">
+    <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 col-xl-4 offset-xl-2 text-light">
         <div class="text-center">
             <h1 class="title shaded" id="app-name">{{title}}</h1>
             <h3 class="title shaded mb-3">My Profile</h3>
@@ -20,7 +20,7 @@
         <!-- Profile pic cloudinary -->
         <div class="container-fluid d-flex justify-content-between align-items-start">
             <div class="me-3" id="profile-pic" style="background-image: url({{user.imageURL}});">
-                {{!-- <img src="{{user.imageURL}}" width="150px" class="mb-3"> --}}
+        
             </div>
             <div class="flex-grow-1">
                 <form class="mb-3" action="/profile/{{user._id}}/new-username" method="POST">
