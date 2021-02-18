@@ -5,6 +5,7 @@
 
 const express = require('express');
 const Cellar = require('../models/Cellar.model');
+const User = require('../models/User.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 
@@ -38,6 +39,9 @@ router.post('/cellars', requireLogin, async (req, res) => {
       capacity,
       createdBy,
     });
+
+    await User.findByIdAndUpdate(createdBy, {$inc: {createdCellars : 1}});
+
     res.redirect('/cellars');
   } catch (error) {
     res.render('cellars-create');

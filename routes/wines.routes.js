@@ -75,6 +75,7 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
   let {name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure} = req.body;
   let createdBy = req.session.currentUser._id;
   let cellarId = req.params.cellarId;
+
   //create the wine and add it to the cellar
   try {
     const createdWine = await Wine.create({
@@ -92,7 +93,8 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
     });
 
     await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: createdWine.id}});
-
+    await User.findByIdAndUpdate(createdBy, {$inc: {[`createdWines.${type}`] : 1, [`createdWines.total`] : 1}});
+    
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
     res.render('wines-create');
