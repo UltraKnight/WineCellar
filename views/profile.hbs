@@ -25,13 +25,21 @@
           </div>
         {{/if}}
 
-<!-- End of profile pic test -->
-         <link rel="stylesheet" href="/stylesheets/style.css">
+<!-- Profile pic test cloudinary -->
+    <img src="{{user.imageURL}}">
+    <form action='/profile/update-profile-pic' method="POST" enctype="multipart/form-data">
+        <input type='file' name='image'/>
+        <input type="submit">
+    </form>
+    
+<!-- End profile pic test cloudinary -->
 
+    <!-- Profile pic test     
             <div class="card">
                 <img src="/images/wines_bg.jpg" alt="John" style="width:100%">
                 <h1>{{user._id}}</h1>
-                
+       <!-- End profile pic test -->
+
                <!--to add friend button-->
                  <form action="/profile/add" method="POST">
                     <input type="hidden" name="id" value="{{user._id}}">
@@ -101,12 +109,7 @@
         </div>
     <!-- end of profile pic test -->
 
-    <!-- a different test with multer, cloudinary, multer-storage-cloudinary-->
-    <form action='/api/images' method="POST" enctype="multipart/form data">
-        <input type='file' name='image'/>
-        <input type="submit">
-    </form>
-
+ 
     </div>
 
 </div>

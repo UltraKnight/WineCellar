@@ -97,6 +97,8 @@ app.use('/', profile);
 const opened = require('./routes/opened.routes');
 app.use('/', opened);
 
+//to use cloudinary same as line 94 and 95
+
 const achievement = require('./routes/achievement.routes');
 app.use('/', achievement);
 
