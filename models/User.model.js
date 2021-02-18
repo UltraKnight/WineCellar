@@ -23,7 +23,9 @@ const userSchema = new Schema ({
       },
       
       imageURL: String,
-
+      
+      switch: Boolean, //for the switch on profile page 
+    
       createdWines: {
         red: {
           type: Number,
