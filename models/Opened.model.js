@@ -6,6 +6,10 @@ const openedSchema = new Schema ({
         type: String,
         required: true
     },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: 'User' //Relates to the User model
+    },
     event: {
       type: String
     },

@@ -21,7 +21,7 @@ router.post('/profile/delete', requireLogin, async (req, res, next) => {
   try {
     let userId = req.body.id;
     req.session.currentUser = null;
-    //remove wine from collecion
+    //remove user's wines from collecion
     await User.findByIdAndDelete(userId);
     res.redirect('/');
   } catch (error) {
@@ -35,11 +35,18 @@ router.post('/profile/delete', requireLogin, async (req, res, next) => {
 router.post('/profile/:id/new-username', requireLogin, async (req, res, next) => {
   try {
     let {username} = req.body;
+    if (username === req.session.currentUser.username) {
+      res.redirect('/profile');
+      return;
+    }
+
     await User.findByIdAndUpdate(req.params.id, {$set: {username}});
     req.session.currentUser.username = username;
     res.render('profile', {user: req.session.currentUser, message: 'Username updated!'});
   } catch (error) {
-    next();
+    if(error.code === 11000) {
+      res.render('profile', {user: req.session.currentUser, errorMessage: 'This username already exists!'});
+    }
     return error;
   }
 });

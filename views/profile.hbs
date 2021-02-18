@@ -9,11 +9,17 @@
                 <label class="form-label shaded" for="username">Username</label>
                 <input class="form-control" type="text" name="username" id="username" value="{{user.username}}">
             </div>
-            <button id="btn-update-username" class="btn btn-danger btn-sm" type="submit">Update Username</button>
+            <button id="btn-update-username" class="btn btn-danger btn-sm" type="submit" disabled>Update Username</button>
         </form>
         {{#if message}}
           <div class="alert alert-success alert-dismissible fade show" role="alert">
           {{message}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {{/if}}
+        {{#if errorMessage}}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{errorMessage}}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         {{/if}}
@@ -42,3 +48,9 @@
         </div>
     <!-- end of profile pic test -->
 </div>
+
+<script>
+    document.getElementById('username').addEventListener('keyup', (event) => {
+        document.getElementById('btn-update-username').disabled = false;
+    });
+</script>

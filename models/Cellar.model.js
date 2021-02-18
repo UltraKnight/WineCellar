@@ -20,7 +20,7 @@ const cellarSchema = new Schema ({
     }],
     createdBy: {
         type: Schema.Types.ObjectId,
-        ref: 'User' //Relates to the Wine model
+        ref: 'User' //Relates to the User model
     }
 });
 
