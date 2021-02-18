@@ -26,7 +26,7 @@
         {{/if}}
 
 <!-- Profile pic test cloudinary -->
-    <img src="{{user.imageURL}}">
+    <img src="{{user.imageURL}}" width="150px">
     <form action='/profile/update-profile-pic' method="POST" enctype="multipart/form-data">
         <input type='file' name='image'/>
         <input type="submit">
