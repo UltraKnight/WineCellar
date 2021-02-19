@@ -114,8 +114,8 @@
 
     //avoid user to let wine type empty
     document.getElementById('new-wine-form').addEventListener('submit', e => {
-        typeElem = event.target.elements.type;
-        nameElem = event.target.elements.name;
+        typeElem = e.target.elements.type;
+        nameElem = e.target.elements.name;
 
         if(! typeElem.value) {
             alert('You must choose a type for your wine!');

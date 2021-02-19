@@ -4,7 +4,7 @@
         <h1 class="title" id="app-name">{{title}}</h1>
         <h5 class="title">Update Wine</h5>
     </div>
-        <form action="/cellars/{{cellar.id}}/wines/{{wine.id}}" method="POST">
+        <form id="edit-form" action="/cellars/{{cellar.id}}/wines/{{wine.id}}" method="POST">
             <div class="mb-3">
                 <label class="form-label" for="name">Name</label>
                 <input class="form-control" type="text" name="name" id="name" 
@@ -127,6 +127,26 @@
         let drinkUntil = `${yyyy}-${mm}-${dd}`;
         elemen.value = drinkUntil;
     }
+
+    //avoid submit without a name or year
+    document.getElementById('edit-form').addEventListener('submit', (e) => {
+        typeElem = e.target.elements.type;
+        nameElem = e.target.elements.name;
+
+        if(! typeElem.value) {
+            alert('You must choose a type for your wine!');
+            typeElem.focus();
+            e.preventDefault();
+            return;
+        }
+
+        if(! nameElem.value) {
+            alert('You must give a name to your wine!');
+            nameElem.focus();
+            e.preventDefault();
+            return;
+        }
+    });
 
     getDate();
     maxYear();
