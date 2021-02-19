@@ -10,6 +10,11 @@
           <p class="mb-0"> Take a look at your conquests in the <a href="/achievements">achievements</a> top bar's option</p>
       </div>
     </div>
+    <script>
+      if(achieveSound) {
+          achieveSound.play();
+      }
+    </script>
     {{/if}}
     <div id="grid-container" class="pt-3 m-auto">
         {{#each cellar.wines}}
@@ -69,7 +74,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" form="open-form" class="btn btn-danger">Open this wine</button>
+        <button type="submit" onclick="openSound.play();" form="open-form" class="btn btn-danger">Open this wine</button>
       </div>
     </div>
   </div>

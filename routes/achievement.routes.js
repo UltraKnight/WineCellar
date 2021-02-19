@@ -3,7 +3,7 @@ const router  = express.Router();
 const Achievement = require('../models/Achievement.model');
 const requireLogin = require('../configs/access-control.config');
 
-//see memories
+//see achievements
 router.get('/achievements', requireLogin, async (req, res, next) => {
   try {
     const userId = req.session.currentUser._id;
