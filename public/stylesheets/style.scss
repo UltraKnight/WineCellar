@@ -15,6 +15,15 @@ a {
   background-color: rgba(219, 21, 21, 0.1);
 }
 
+.nav-picture {
+  width: 35px;
+  height: 35px;
+  background-position-x: center;
+  background-position-y: top;
+  background-size: cover;
+  border-radius: 50%;
+}
+
 .container-general {
   min-height: 93vh;
   padding-bottom: 50px;

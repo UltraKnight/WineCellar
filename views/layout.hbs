@@ -44,6 +44,7 @@
               <a class="nav-link" aria-current="page" href="/achievements">Achievements</a>
             </li>
             <li class="d-flex align-items-center ms-5">
+              <div class="me-2 nav-picture" style="background-image: url({{session.currentUser.imageURL}});"></div>
               <span class="text-light me-3">Hello {{session.currentUser.username}}</span>
               <form action="/logout" method="POST">
                 <button class="btn btn-outline-danger btn-sm pb-0 pt-0" type="submit" id="logout">Logout</button>
