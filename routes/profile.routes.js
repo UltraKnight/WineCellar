@@ -110,7 +110,7 @@ router.get('/profile', (req, res) => {
 
 //switch settings save
 
-//for red wine
+//for wine switches
 router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
   
   let {red, white, rose, sparkling, dessert, green, porto } = req.body;
@@ -121,7 +121,7 @@ router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) 
   dessert = dessert ? true : false;
   green = green ? true : false;
   porto = porto ? true : false;
-  
+
     User.findByIdAndUpdate((req.session.currentUser._id), {
       $set:{red, white, rose, sparkling, dessert, green, porto}
 }, {new: true}
