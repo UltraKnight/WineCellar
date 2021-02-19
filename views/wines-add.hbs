@@ -12,7 +12,7 @@
                 <select name="wineId" id="wine-list">
                     <option selected value="" disabled>Select a wine to add</option>
                     {{#each wines}}
-                        <option value="{{id}}">{{this.year}} - {{name}} - {{type}}</option>
+                        <option value="{{id}}">{{this.year}} - {{name}} - {{type}} - creator {{createdBy.username}}</option>
                     {{/each}}
                 </select>
             </div>
