@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   //console.log('IronGenerator JS imported successfully!');
+  document.querySelector('.spinner').style.display = 'inline-block';
 }, false);
 
 window.onload = () => {
+  document.querySelector('.spinner').style.display = 'none';
+
   const appNameElem = document.getElementById('app-name');
   if(appNameElem) {
     appNameElem.classList.add('big-text');

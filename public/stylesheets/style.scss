@@ -8,6 +8,13 @@ a {
   color: #00B7FF;
 }
 
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: rgba(219, 21, 21, 0.1);
+}
+
 .container-general {
   min-height: 93vh;
   padding-bottom: 50px;
