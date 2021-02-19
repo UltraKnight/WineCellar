@@ -10,7 +10,12 @@ const WineModel = require('../models/Wine.model');
 router.get('/profile', requireLogin, async (req, res, next) => {
   let achievement = req.query.achievement || null;
   try {
-    res.render('profile', {user : req.session.currentUser, achievement});
+    const wineLoverMeterOptions = [
+      "Wine Enthusiast (Love wine)",
+      "Wine&Social (Drink socially)",
+      "Grape Lover (Prefer grapes juice but drinks a glass once in a while)"
+    ]
+    res.render('profile', {user : req.session.currentUser, achievement, wineLoverMeterOptions});
   } catch (error) {
     next();
     return error;
@@ -102,7 +107,8 @@ router.post('/profile/update-profile-pic', fileUpload.single('image'), async (re
 router.get('/profile', (req, res) => {
   User.find()
   .then((user) => {
-    res.render('user-list', { profile: user});
+   
+    res.render('user-list', { profile: user });
   });
 });
 /* cloudinary test end */
@@ -134,22 +140,16 @@ router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) 
 //winelovers meter
 
 router.post('/profile/wine-lover', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.wine;
+  let { wineLoverMeter } = req.body;
 
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
 
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
+
+  User.findByIdAndUpdate((req.session.currentUser._id), {wineLoverMeter}, {new: true}
 ).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
+  req.session.currentUser = newUser;
+  res.redirect('/profile');
 }); 
+});
+
 
 module.exports = router;
