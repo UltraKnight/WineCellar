@@ -24,7 +24,20 @@ const userSchema = new Schema ({
       
       imageURL: String,
       
-      switch: Boolean, //for the switch on profile page 
+      red: Boolean, //for the switch on profile page
+      
+      white: Boolean,
+      
+      rose: Boolean, 
+      
+      sparkling: Boolean, 
+      
+      dessert: Boolean, 
+      
+      green: Boolean, 
+      
+      porto: Boolean,
+
     
       createdWines: {
         red: {

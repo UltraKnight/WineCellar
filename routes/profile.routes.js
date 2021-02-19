@@ -112,144 +112,24 @@ router.get('/profile', (req, res) => {
 
 //for red wine
 router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.red;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
+  
+  let {red, white, rose, sparkling, dessert, green, porto } = req.body;
+  red = red ? true : false;
+  white = white ? true : false;
+  rose = rose ? true : false;
+  sparkling = sparkling ? true : false;
+  dessert = dessert ? true : false;
+  green = green ? true : false;
+  porto = porto ? true : false;
+  
     User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
+      $set:{red, white, rose, sparkling, dessert, green, porto}
 }, {new: true}
 ).then((newUser) => {
     req.session.currentUser = newUser;
     res.redirect('/profile');
   }); 
 });
-
-//white wine
-router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.white;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
-).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
-});
-
-//rose wine
-router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.rose;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
-).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
-});
-
-//sparkling wine
-router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.sparkling;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
-).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
-});
-
-//dessert
-router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.dessert;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
-).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
-});
-
-//green whine
-router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.green;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
-).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
-});
-
-//porto wine
-router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  let checkbox = req.body.porto;
-
-  if (checkbox){
-    checkbox = true;
-  } else {
-    checkbox = false;
-  }
-
-    User.findByIdAndUpdate((req.session.currentUser._id), {
-      $set:{switch: checkbox
-}
-}, {new: true}
-).then((newUser) => {
-    req.session.currentUser = newUser;
-    res.redirect('/profile');
-  }); 
-});
-
 
 //winelovers meter
 
