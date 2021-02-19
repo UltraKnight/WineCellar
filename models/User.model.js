@@ -23,8 +23,26 @@ const userSchema = new Schema ({
       },
       
       imageURL: String,
+
+      //for the switch on profile page
+
+      red: Boolean, 
       
-      switch: Boolean, //for the switch on profile page 
+      white: Boolean,
+      
+      rose: Boolean, 
+      
+      sparkling: Boolean, 
+      
+      dessert: Boolean, 
+      
+      green: Boolean, 
+      
+      porto: Boolean,
+
+      //for the wineLover meter
+      wineLoverMeter: String,
+      //end of winelover meter
     
       createdWines: {
         red: {

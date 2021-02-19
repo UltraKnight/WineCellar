@@ -110,14 +110,20 @@
         <!-- Test the wineLover selection -->
      <form class="select" id="wine-lover" action="/profile/wine-lover" method="POST">
         <div class="mb-3">
+        
             <label class="form-label wine-lover-list" for="wine-lover-list">WineLover Meter:</label>
-            <select id="wine-lover-list" name="wine" class="form-select">
+            <select id="wine-lover-list" name="wineLoverMeter" class="form-select">
                 <option selected disabled>Open to choose</option>
-                <option value="1">Wine Enthusiast (Love wine) </option>
-                <option value="2">Wine&Social (Drink socially)</option>
-                <option value="3">Grape Lover (Prefer grapes juice but drinks a glass once in a while)</option>
+                {{#each wineLoverMeterOptions}}
+                    {{#eq ../user.wineLoverMeter this}}
+                        <option value="{{this}}" selected>{{this}}</option>
+                    {{else}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/eq}}
+                {{/each}}
+              
             </select>
-            <button type="submit">Choose</button>
+            <button id="btn-delete-username" class="btn btn-danger btn-sm" type="submit">Choose</button>  
         </div>
     </form>
         <!-- End of WineLove Selection test -->
@@ -136,20 +142,16 @@
     });
 
 //switch buttons of favorite wine
-    document.getElementsByName('red')[0].checked = {{user.switch}}
-    document.getElementsByName('white')[0].checked = {{user.switch}}
-    document.getElementsByName('rose')[0].checked = {{user.switch}}
-    document.getElementsByName('sparkling')[0].checked = {{user.switch}}
-    document.getElementsByName('dessert')[0].checked = {{user.switch}}
-    document.getElementsByName('green')[0].checked = {{user.switch}}
-    document.getElementsByName('porto')[0].checked = {{user.switch}}
+    document.getElementsByName('red')[0].checked = {{user.red}}
+    document.getElementsByName('white')[0].checked = {{user.white}}
+    document.getElementsByName('rose')[0].checked = {{user.rose}}
+    document.getElementsByName('sparkling')[0].checked = {{user.sparkling}}
+    document.getElementsByName('dessert')[0].checked = {{user.dessert}}
+    document.getElementsByName('green')[0].checked = {{user.green}}
+    document.getElementsByName('porto')[0].checked = {{user.porto}}
 
 //winelover meter select
-    document.getElementById('wine-lover-list').submit();
-    
-    //addEventListener('submit', (event) => {
-     //   document.getElementById('btn-update-username').disabled = false;
-    //});
+  
 
 </script>
 
