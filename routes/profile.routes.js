@@ -4,6 +4,7 @@ const Achievement = require('../models/Achievement.model');
 const router = express.Router();
 const requireLogin = require('../configs/access-control.config');
 const fileUpload = require('../configs/cloudinary');
+const WineModel = require('../models/Wine.model');
 
 //see user data
 router.get('/profile', requireLogin, async (req, res, next) => {
@@ -108,25 +109,167 @@ router.get('/profile', (req, res) => {
 
 
 //switch settings save
-router.get('/profile/favorite-wine-type', (req, res) => {
-  res.render('profile');
-});
 
-
-let checkbox = true;
+//for red wine
 router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
-  
+  let checkbox = req.body.red;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
     User.findByIdAndUpdate((req.session.currentUser._id), {
       $set:{switch: checkbox
-  }}).then(() => {
-    req.session.currentUser.switch = true;
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
     res.redirect('/profile');
-  });
+  }); 
+});
 
+//white wine
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.white;
 
-  
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
+});
+
+//rose wine
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.rose;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
+});
+
+//sparkling wine
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.sparkling;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
+});
+
+//dessert
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.dessert;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
+});
+
+//green whine
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.green;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
+});
+
+//porto wine
+router.post('/profile/favorite-wine-type', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.porto;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
 });
 
 
+//winelovers meter
+
+router.post('/profile/wine-lover', requireLogin, async (req, res, next) => {
+  let checkbox = req.body.wine;
+
+  if (checkbox){
+    checkbox = true;
+  } else {
+    checkbox = false;
+  }
+
+    User.findByIdAndUpdate((req.session.currentUser._id), {
+      $set:{switch: checkbox
+}
+}, {new: true}
+).then((newUser) => {
+    req.session.currentUser = newUser;
+    res.redirect('/profile');
+  }); 
+}); 
 
 module.exports = router;

@@ -73,28 +73,32 @@
             <label class="form-label-check shaded" for="wine-list">My Favorite Types of Wine:</label>
         <form class="checkbox" action="/profile/favorite-wine-type" method="POST">
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Red</label>
+                <input class="form-check-input" type="checkbox" name="red" id="flexSwitchCheckRed" checked="off" value="red-wine">
+                <label class="form-check-label" for="flexSwitchCheckRed">Red</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">White</label>
+                <input class="form-check-input" type="checkbox" name="white" id="flexSwitchCheckWhite" checked="off" value="white-wine">
+                <label class="form-check-label" for="flexSwitchCheckWhite">White</label>
+            </div>
+             <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="rose" id="flexSwitchCheckRose" checked="off" value="rose-wine">
+                <label class="form-check-label" for="flexSwitchCheckRose">Rose</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Sparkling</label>
+                <input class="form-check-input" type="checkbox" name="sparkling" id="flexSwitchCheckSparkling" checked="off" value="sparkling-wine">
+                <label class="form-check-label" for="flexSwitchCheckSparkling">Sparkling</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Dessert</label>
+                <input class="form-check-input" type="checkbox" name="dessert" id="flexSwitchCheckDessert" checked="off" value="dessert-wine">
+                <label class="form-check-label" for="flexSwitchCheckDessert">Dessert</label>
             </div>
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Green</label>
+                <input class="form-check-input" type="checkbox" name="green" id="flexSwitchCheckGreen" checked="off" value="green-wine">
+                <label class="form-check-label" for="flexSwitchCheckGreen">Green</label>
             </div>
             <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Porto</label>
+                    <input class="form-check-input" type="checkbox" name="porto" id="flexSwitchCheckPorto" checked="off" value="porto-wine">
+                    <label class="form-check-label" for="flexSwitchCheckPorto">Porto</label>
             </div>
              <div class="form-check form-switch">
                 <button class="btn btn-danger" id="btn-change-image" type="submit">Add Choices</button>
@@ -104,9 +108,10 @@
         <!-- test end -->
 
         <!-- Test the wineLover selection -->
+     <form class="select" id="wine-lover" action="/profile/wine-lover" method="POST">
         <div class="mb-3">
-            <label class="form-label wine-lover" for="wine-list">WineLover Meter:</label>
-            <select id="wine-list" class="form-select">
+            <label class="form-label wine-lover-list" for="wine-lover-list">WineLover Meter:</label>
+            <select id="wine-lover-list" name="wine" class="form-select">
                 <option selected disabled>Open to choose</option>
                 <option value="1">Wine Enthusiast (Love wine) </option>
                 <option value="2">Wine&Social (Drink socially)</option>
@@ -114,6 +119,7 @@
             </select>
             <button type="submit">Choose</button>
         </div>
+    </form>
         <!-- End of WineLove Selection test -->
             
         <!-- the delete button -->
@@ -128,20 +134,22 @@
     document.getElementById('username').addEventListener('keyup', (event) => {
         document.getElementById('btn-update-username').disabled = false;
     });
+
+//switch buttons of favorite wine
+    document.getElementsByName('red')[0].checked = {{user.switch}}
+    document.getElementsByName('white')[0].checked = {{user.switch}}
+    document.getElementsByName('rose')[0].checked = {{user.switch}}
+    document.getElementsByName('sparkling')[0].checked = {{user.switch}}
+    document.getElementsByName('dessert')[0].checked = {{user.switch}}
+    document.getElementsByName('green')[0].checked = {{user.switch}}
+    document.getElementsByName('porto')[0].checked = {{user.switch}}
+
+//winelover meter select
+    document.getElementById('wine-lover-list').submit();
+    
+    //addEventListener('submit', (event) => {
+     //   document.getElementById('btn-update-username').disabled = false;
+    //});
+
 </script>
 
-<!-- for the types of wine selector -->
-<!--
-<script>
-    function checkBox(){
-        checkbox.addEventListener('change', (e) => {
-            let list = checkbox.document.getElementById();
-            list = [...list];
-            list.forEach(checkbox) => {
-                checkbox.submit();
-              // findByIdAndUpdate();
-                ('disable', true);
-            }
-        });
-    }
-</script> -->                                                                                                                                                                                           
