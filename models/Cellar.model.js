@@ -11,6 +11,7 @@ const cellarSchema = new Schema ({
     place: String,
     capacity: {
         type: Number,
+        min: 1,
         max: 900,
         default: 30
     },
