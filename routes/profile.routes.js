@@ -8,9 +8,8 @@ const WineModel = require('../models/Wine.model');
 
 //see user data
 router.get('/profile', requireLogin, async (req, res, next) => {
-  let achievement = req.query.achievement || null;
   try {
-    res.render('profile', {user : req.session.currentUser, achievement});
+    res.render('profile', {user : req.session.currentUser});
   } catch (error) {
     next();
     return error;
@@ -85,9 +84,8 @@ router.post('/profile/update-profile-pic', fileUpload.single('image'), async (re
       req.session.currentUser = newUser;
       //achievement
       let achievementName = 'Waiter, another shot, please!';
-      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});      
-      let achievement = encodeURIComponent(achievementName);
-      res.redirect(`/profile/?achievement=` + achievement);
+      await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
+      res.render('profile', {user: newUser, achievement: achievementName});
       //achievement
       return;
     }

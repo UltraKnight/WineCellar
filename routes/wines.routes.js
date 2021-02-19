@@ -14,12 +14,11 @@ const countryList = require('country-list');
 
 //get all wines
 router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
-  let achievement = req.query.achievement || null;
   try {
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate('wines');
     //Get wines that are in this cellar
-    res.render('wines-list', {cellar, achievement});
+    res.render('wines-list', {cellar});
   } catch (error) {
    next();
    return error;
@@ -58,17 +57,17 @@ router.post('/cellars/:cellarId/wines/add', requireLogin, async (req, res) => {
   let cellarId = req.params.cellarId;
 
   try{
-    await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: wineId}});
+    const cellar = await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: wineId}}, {new:true}).populate('wines');
 
     //achievement
     let user = req.session.currentUser;
     if(! user.addedFirst) {
-      await User.findByIdAndUpdate(user._id, {addedFirst: true});
+      let newUser = await User.findByIdAndUpdate(user._id, {addedFirst: true}, {new:true});
+      req.session.currentUser = newUser;
       const achievementName = 'My precious!';
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: user._id}});
 
-      let achievement = encodeURIComponent(achievementName);
-      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      res.render('wines-list', {cellar, achievement : achievementName});
       return;
     }
     //achievement
@@ -107,18 +106,18 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
         closure
     });
 
-    await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: createdWine.id}});
+    const cellar = await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: createdWine.id}}, {new:true}).populate('wines');
     const newUser = await User.findByIdAndUpdate(createdBy, {$inc: {[`createdWines.${type}`] : 1, [`createdWines.total`] : 1}}, {new:true});
     req.session.currentUser = newUser;
-    
+
     //achievement
-    if(! newUser.addedFirst) {
-      await User.findByIdAndUpdate(newUser.id, {addedFirst: true});
+    if(! req.session.currentUser.addedFirst) {
+      const updatedUser = await User.findByIdAndUpdate(req.session.currentUser._id, {addedFirst: true}, {new:true});
+      req.session.currentUser = updatedUser;
       const achievementName = 'My precious!';
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
 
-      let achievement = encodeURIComponent(achievementName);
-      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      res.render('wines-list', {cellar, achievement : achievementName});
       return;
     }
     //achievement
@@ -137,8 +136,8 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
         await Achievement.findOneAndUpdate({name: `Wine-cannon`}, {$push: {users: newUser.id}});
         achievementName += ' and Wine-cannon';
       }
-      let achievement = encodeURIComponent(achievementName);
-      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+
+      res.render('wines-list', {cellar, achievement : achievementName});
       return;
     }
     //achievement
@@ -147,8 +146,7 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
       const achievementName = `Wine-cannon`;
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
 
-      let achievement = encodeURIComponent(achievementName);
-      res.redirect(`/cellars/${cellarId}/wines/?achievement=` + achievement);
+      res.render('wines-list', {cellar, achievement : achievementName});
       return;
     }
 
@@ -166,9 +164,15 @@ router.post('/cellars/:cellarId/wines/:wineId/delete', requireLogin, async (req,
     //remove wine from collecion
     //await Wine.findByIdAndDelete(wineId);
     //remove this wine from Cellar
-    await Cellar.findByIdAndUpdate(cellarId, {$pull: { wines: wineId}});
+
+    const foundCellarWines = await Cellar.findById(cellarId);
+    const index =  foundCellarWines.wines.indexOf(wineId);
+    foundCellarWines.wines.splice(index, 1);
+    await Cellar.findByIdAndUpdate(cellarId, {wines : foundCellarWines.wines});
+
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
+    console.log(error);
     next();
     return error;
   }

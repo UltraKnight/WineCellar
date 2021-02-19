@@ -12,10 +12,9 @@ const requireLogin = require('../configs/access-control.config');
 
 //get all cellars
 router.get('/cellars', requireLogin, async (req, res, next) => {
-  let achievement = req.query.achievement || null;
   try {
     let cellars = await Cellar.find({createdBy:req.session.currentUser._id});
-    res.render('cellars-list', {cellars, achievement});
+    res.render('cellars-list', {cellars});
   } catch (error) {
     console.log(error);
     next();
@@ -48,11 +47,11 @@ router.post('/cellars', requireLogin, async (req, res) => {
 
     //Achievement
     if(newUser.createdCellars === 1) {
+      let cellars = await Cellar.find({createdBy:req.session.currentUser._id});
       const achievementName = 'Keep it safe';
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
 
-      let achievement = encodeURIComponent(achievementName);
-      res.redirect('/cellars/?achievement=' + achievement);
+      res.render('cellars-list', {cellars, achievement : achievementName});
       return;
     }
     //Achievement
