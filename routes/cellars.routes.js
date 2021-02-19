@@ -103,6 +103,16 @@ router.post('/cellars/:id', requireLogin, async (req, res, next) => {
       return;
     }
 
+    if(capacity <= 0) {
+      res.render('cellars-edit', {cellar, errorMessage: 'You need to have at least one space in your cellar.'});
+      return;
+    }
+
+    if(!name) {
+      res.render('cellars-edit', {cellar, errorMessage: 'Your wine cellar must have a name.'});
+      return;
+    }
+
     if(cellar.createdBy != req.session.currentUser._id) {
       res.redirect('/cellars');
       return;
