@@ -26,19 +26,40 @@ const userSchema = new Schema ({
 
       //for the switch on profile page
 
-      red: Boolean, 
+      red: {
+        type: Boolean,
+        default: true
+      },
       
-      white: Boolean,
+      white: {
+        type: Boolean,
+        default: true
+      },
       
-      rose: Boolean, 
+      rose: {
+        type: Boolean,
+        default: true
+      }, 
       
-      sparkling: Boolean, 
+      sparkling: {
+        type: Boolean,
+        default: true
+      },
       
-      dessert: Boolean, 
+      dessert: {
+        type: Boolean,
+        default: true
+      },
       
-      green: Boolean, 
+      green: {
+        type: Boolean,
+        default: true
+      },
       
-      porto: Boolean,
+      porto: {
+        type: Boolean,
+        default: true
+      },
 
       //for the wineLover meter
       wineLoverMeter: String,
