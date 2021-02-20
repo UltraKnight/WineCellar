@@ -6,31 +6,38 @@ const bcrypt = require('bcrypt');
 const { /*gmail*/ outlook, mailOptions} = require('../configs/nodemailer.config'); //choose between gmail or outlook
 mailOptions.from = 'WINE CELLAR <vanderlei.i.martins@outlook.com>'; //change sender email here
 
-router.get('/signup', (_req, res) => {
-    res.render('auth/signup');
+router.get('/signup', (req, res) => {
+    let errorMessage = req.session.errorMessage;
+    if(errorMessage) {
+        req.session.errorMessage = undefined;
+    }
+
+    res.render('auth/signup', {errorMessage});
 });
 
 router.post('/signup', async (req, res) => {
   const {username, email, password} = req.body;
 
   if(username === '' || password === '') {
-      res.render('/signup', {errorMessage: 'Username and password must be filled and valid'});
-
-      return;
+        req.session.errorMessage = 'Username and password must be filled and valid';
+        res.redirect('/signup');
+        return;
   }
 
   const passwordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if(! passwordRegex.test(password)) {
-      res.render('auth/signup', {errorMessage: `Your password must contain at least 1 of each: 
-          lowercase letter, uppercase letter, number and have six or more characters`});
+        req.session.errorMessage = `Your password must contain at least 1 of each: 
+        lowercase letter, uppercase letter, number and have six or more characters`;
 
+        res.redirect('/signup');
       return;
   }
 
   const user = await User.findOne({username});
   if(user) {
-      res.render('auth/signup', {errorMessage: 'Unfortunatly someone already has your username :('});
-
+      
+      req.session.errorMessage = 'Unfortunatly someone already has your username :(';
+      res.redirect('/signup');
       return;
   }
 
@@ -59,8 +66,10 @@ router.post('/signup', async (req, res) => {
         // achievement
         await Achievement.findOneAndUpdate({name: 'Wine-friendly'}, {$push: {users: createdUser.id}});
         // achievement
-
-        res.render('index', {achievement: true});
+        req.session.currentUser = createdUser;
+        req.session.achievement = 'Wine-friendly';
+        res.redirect('/');
+        //res.render('index', {achievement: true});
   } catch (err) {
       if(err.code === 11000) {
           res.render('auth/signup', {errorMessage: 'Username or e-mail already registered'});

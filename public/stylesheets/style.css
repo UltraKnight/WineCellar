@@ -111,7 +111,7 @@ footer, nav, .container-opaque {
   .cellars a {
     text-decoration: none; }
 
-form a {
+form a, .left-profile-menu a {
   text-decoration: none; }
 
 #app-name {

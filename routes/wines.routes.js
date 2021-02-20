@@ -15,10 +15,15 @@ const countryList = require('country-list');
 //get all wines
 router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
   try {
+    const achievement = req.session.achievement;
     //Get current cellar
     let cellar = await Cellar.findById(req.params.cellarId).populate('wines');
-    //Get wines that are in this cellar
-    res.render('wines-list', {cellar});
+
+    if(achievement) {
+      req.session.achievement = undefined;
+    }
+
+    res.render('wines-list', {cellar, achievement});
   } catch (error) {
    next();
    return error;
@@ -57,7 +62,7 @@ router.post('/cellars/:cellarId/wines/add', requireLogin, async (req, res) => {
   let cellarId = req.params.cellarId;
 
   try{
-    const cellar = await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: wineId}}, {new:true}).populate('wines');
+    await Cellar.findByIdAndUpdate(cellarId, {$push: {wines: wineId}}).populate('wines');
 
     //achievement
     let user = req.session.currentUser;
@@ -67,14 +72,15 @@ router.post('/cellars/:cellarId/wines/add', requireLogin, async (req, res) => {
       const achievementName = 'My precious!';
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: user._id}});
 
-      res.render('wines-list', {cellar, achievement : achievementName});
+      req.session.achievement = achievementName;
+      res.redirect(`/cellars/${cellarId}/wines`);
       return;
     }
     //achievement
 
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
-    res.render('wines-create');
+    res.redirect(`/cellars/${cellarId}/wines/add`);
   }
 });
 
@@ -117,7 +123,8 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
       const achievementName = 'My precious!';
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
 
-      res.render('wines-list', {cellar, achievement : achievementName});
+      req.session.achievement = achievementName;
+      res.redirect(`/cellars/${cellarId}/wines`);
       return;
     }
     //achievement
@@ -137,7 +144,8 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
         achievementName += ' and Wine-cannon';
       }
 
-      res.render('wines-list', {cellar, achievement : achievementName});
+      req.session.achievement = achievementName;
+      res.redirect(`/cellars/${cellarId}/wines`);
       return;
     }
     //achievement
@@ -146,13 +154,14 @@ router.post('/cellars/:cellarId/wines', requireLogin, async (req, res) => {
       const achievementName = `Wine-cannon`;
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
 
-      res.render('wines-list', {cellar, achievement : achievementName});
+      req.session.achievement = achievementName;
+      res.redirect(`/cellars/${cellarId}/wines`);
       return;
     }
 
     res.redirect(`/cellars/${cellarId}/wines`);
   } catch (error) {
-    res.render('wines-create');
+    res.redirect(`/cellars/${cellarId}/wines/create`);
   }
 });
 
@@ -266,7 +275,9 @@ router.get('/cellars/:cellarId/wines/:wineId', requireLogin, async (req, res) =>
 
       res.render('wines-details', {wine, cellarId : req.params.cellarId});
   } catch (error) {
-    res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});
+    //res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});
+    req.session.errorMessage = 'The page you tried to access is not working right now, give it a time!';
+    res.redirect('/');
     return error;
   }
 });

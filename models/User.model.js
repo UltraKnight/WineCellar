@@ -22,6 +22,11 @@ const userSchema = new Schema ({
         require: [true, 'Password is required']
       },
       
+      friends: [{
+          type: Schema.Types.ObjectId,
+          ref: 'User'
+      }],
+
       imageURL: String,
 
       //for the switch on profile page

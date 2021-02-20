@@ -264,7 +264,7 @@ function createArrayAchievements() {
     {
       name: 'Green-lover',
       description: 'Create 10 green wines',
-      imageURL: 'green-lover',
+      imageURL: '/images/achievements/green-lover.png',
       users: []
     },
     {

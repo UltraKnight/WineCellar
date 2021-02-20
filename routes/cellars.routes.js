@@ -12,9 +12,14 @@ const requireLogin = require('../configs/access-control.config');
 
 //get all cellars
 router.get('/cellars', requireLogin, async (req, res, next) => {
+  const achievement = req.session.achievement;
+
+  if(achievement) {
+    req.session.achievement = undefined;
+  }
   try {
     let cellars = await Cellar.find({createdBy:req.session.currentUser._id});
-    res.render('cellars-list', {cellars});
+    res.render('cellars-list', {cellars, achievement});
   } catch (error) {
     console.log(error);
     next();
@@ -47,18 +52,18 @@ router.post('/cellars', requireLogin, async (req, res) => {
 
     //Achievement
     if(newUser.createdCellars === 1) {
-      let cellars = await Cellar.find({createdBy:req.session.currentUser._id});
       const achievementName = 'Keep it safe';
       await Achievement.findOneAndUpdate({name: achievementName}, {$push: {users: newUser.id}});
 
-      res.render('cellars-list', {cellars, achievement : achievementName});
+      req.session.achievement = achievementName;
+      res.redirect('/cellars');
       return;
     }
     //Achievement
 
     res.redirect('/cellars');
   } catch (error) {
-    res.render('cellars-create');
+    res.redirect('/cellars/create');
   }
 });
 
@@ -83,9 +88,14 @@ router.post('/cellars/:id/delete', requireLogin, async (req, res, next) => {
 
 //update cellar form
 router.get('/cellars/:id/edit', requireLogin, async (req, res, next) => {
+  errorMessage = req.session.errorMessage;
+  if(errorMessage) {
+    req.session.errorMessage = undefined;
+  }
+
   try {
     let cellar = await Cellar.findById(req.params.id);
-    res.render('cellars-edit', {cellar});
+    res.render('cellars-edit', {cellar, errorMessage});
   } catch (error) {
     next();
     return error;
@@ -97,18 +107,22 @@ router.post('/cellars/:id', requireLogin, async (req, res, next) => {
   try {
     let {name, place, capacity} = req.body;
     const cellar = await Cellar.findById(req.params.id);
+
     if(cellar.wines.length > capacity) {
-      res.render('cellars-edit', {cellar, errorMessage: 'You can\'t have more wines than free spaces in your cellar.'});
+      req.session.errorMessage = 'You can\'t have more wines than free spaces in your cellar.';
+      res.redirect(`/cellars/${cellar.id}/edit`);
       return;
     }
 
     if(capacity <= 0) {
-      res.render('cellars-edit', {cellar, errorMessage: 'You need to have at least one space in your cellar.'});
+      req.session.errorMessage = 'You need to have at least one space in your cellar.';
+      res.redirect(`/cellars/${cellar.id}/edit`);
       return;
     }
 
     if(!name) {
-      res.render('cellars-edit', {cellar, errorMessage: 'Your wine cellar must have a name.'});
+      req.session.errorMessage = 'Your wine cellar must have a name.';
+      res.redirect(`/cellars/${cellar.id}/edit`);
       return;
     }
 
@@ -138,7 +152,8 @@ router.get('/cellars/:id', requireLogin, async (req, res) => {
 
       res.render('cellars-details', {cellar});
   } catch (error) {
-    res.render('index', {errorMessage: 'The page you tried to access is not working right now, give it a time!'});
+    req.session.errorMessage = 'The page you tried to access is not working right now, give it a time!';
+    res.redirect('/');
     return error;
   }
 });
