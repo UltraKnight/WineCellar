@@ -10,7 +10,8 @@
                 {{#if user.friends}}
                     {{#each user.friends}}
                     <div class="d-flex align-items-center justify-content-between">
-                        <p class="m-1"><a href="/profile/{{username}}">{{username}}</a></p>
+                        {{!-- <p class="m-1"><a href="/profile/{{username}}">{{username}}</a></p> --}}
+                        <p class="m-1">{{username}}</p>
                         <form action="/profile/friend-delete" method="POST">
                             <input type="hidden" name="id" value="{{id}}">
                             <button type="submit" class="btn bg-transparent p-0 m-0 btn-sm">
