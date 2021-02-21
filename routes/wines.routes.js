@@ -33,7 +33,8 @@ router.get('/cellars/:cellarId/wines', requireLogin, async (req, res, next) => {
 //add form
 router.get('/cellars/:cellarId/wines/add', requireLogin, async (req, res, next) => {
   try {
-    let arrUsers = await User.find({username: [req.session.currentUser.username, 'WineKeeper']}).select('_id');
+    let user = req.session.currentUser;
+    let arrUsers = await User.find({$or: [{username: [user.username, 'WineKeeper']}, {friends: user._id}]}).select('_id');
     let wines = await Wine.find({createdBy: arrUsers}).populate('createdBy');
     res.render('wines-add', {cellarId: req.params.cellarId, wines, countryList: countryList.getNames()});
   } catch (error) {
