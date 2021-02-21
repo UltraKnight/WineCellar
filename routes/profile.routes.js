@@ -149,7 +149,7 @@ router.post('/profile/request-accept', requireLogin, async (req, res) => {
     //remove Request
     await Request.findByIdAndDelete(id);
 
-    req.session.message = 'Friend added';
+    req.session.message = `Friend added. Now you can see ${sender.username} profile and wines`;
     res.redirect('/profile');
   } catch (error) {
     console.log(error);
