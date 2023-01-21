@@ -46,6 +46,8 @@ app.use(require('node-sass-middleware')({
 //// Express Session Setup
 app.use(
   session({
+      resave: true,
+      saveUninitialized: false,
       secret: process.env.SESSION_SECRET,
       cookie: {
           maxAge: 60 * 60 * 24 * 1000,
