@@ -1,137 +1,113 @@
-<div class="container-fluid container-general container-wine">
-    <div class="col-md-4 offset-md-4 text-light">
-    <div class="text-center">
-        <h1 class="title" id="app-name">{{title}}</h1>
-        <h5 class="title">Create a Wine</h5>
+<div class='container-fluid container-general container-wine'>
+  <div class='col-md-4 offset-md-4 text-light'>
+    <div class='text-center'>
+      <h1 class='title' id='app-name'>{{title}}</h1>
+      <h5 class='title'>Create a Wine</h5>
     </div>
-        <form id="new-wine-form" action="/cellars/{{cellarId}}/wines" method="POST">
-            <div class="mb-3">
-                <label class="form-label" for="name">Name</label>
-                <input class="form-control" type="text" name="name" id="name" placeholder="Insert wine's name here" required>
-            </div>
+    <form id='new-wine-form' action='/cellars/{{cellarId}}/wines' method='POST'>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='name'>Name</label>
+        <input class='form-control' type='text' name='name' id='name' placeholder="Insert wine's name here" required />
+      </div>
 
-            <div class="mb-3">
-                <div>
-                    <label class="form-label" for="country-list">Country</label>
-                    <select name="country" id="country-list">
-                        {{#each countryList}}
-                            {{#eq this 'Portugal'}}
-                                <option value="{{this}}" selected>{{this}}</option>
-                            {{else}}
-                                <option value="{{this}}">{{this}}</option>
-                            {{/eq}}
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
+      <div class='mb-3'>
+        <div>
+          <label class='form-label shaded' for='country-list'>Country</label>
+          <select name='country' id='country-list'>
+            {{#each countryList}}
+              {{#eq this 'Portugal'}}
+                <option value='{{this}}' selected>{{this}}</option>
+              {{else}}
+                <option value='{{this}}'>{{this}}</option>
+              {{/eq}}
+            {{/each}}
+          </select>
+        </div>
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="year">Year</label>
-                <input class="form-control" type="number" name="year" id="year" placeholder="Year">
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='year'>Year</label>
+        <input class='form-control' type='number' name='year' id='year' placeholder='Year' />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="annotations">Annotations</label>
-                <textarea class="form-control" name="annotations" id="annotations" 
-                    placeholder="Notes about the wine, for example: it's position or a short description"></textarea>
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='annotations'>Annotations</label>
+        <textarea
+          class='form-control'
+          name='annotations'
+          id='annotations'
+          placeholder="Notes about the wine, for example: it's position or a short description"
+        ></textarea>
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="type-list">Type</label>
-                <select class="form-select" name="type" id="type-list" required>
-                    <option value="" disabled selected>Choose the type of your wine</option>
-                    <option value="red">red</option>
-                    <option value="white">white</option>
-                    <option value="rose">rose</option>
-                    <option value="sparkling">sparkling</option>
-                    <option value="green">green</option>
-                    <option value="porto">porto</option>
-                    <option value="dessert">dessert</option>
-                </select>
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='type-list'>Type</label>
+        <select class='form-select' name='type' id='type-list' required>
+          <option value='' disabled selected>Choose the type of your wine</option>
+          <option value='red'>red</option>
+          <option value='white'>white</option>
+          <option value='rose'>rose</option>
+          <option value='sparkling'>sparkling</option>
+          <option value='green'>green</option>
+          <option value='porto'>porto</option>
+          <option value='dessert'>dessert</option>
+        </select>
+      </div>
 
-            <div class="mb-3">
-                <label for="blend">Blend/Grape Mix:</label>
-                <input class="form-control" type="text" name="blend" id="blend" placeholder="Grapes used in this wine">
-            </div>
+      <div class='mb-3'>
+        <label for='blend'>Blend/Grape Mix:</label>
+        <input class='form-control' type='text' name='blend' id='blend' placeholder='Grapes used in this wine' />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="abv">Alcohol By Volume (%):</label>
-                <input class="form-control" min="3" max="90" step="0.1" type="number" name="abv" id="abv" placeholder="% Alcohol Content">
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='abv'>Alcohol By Volume (%):</label>
+        <input
+          class='form-control'
+          min='3'
+          max='90'
+          step='0.1'
+          type='number'
+          name='abv'
+          id='abv'
+          placeholder='% Alcohol Content'
+        />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="drinkUntil">Best date limit to drink:</label>
-                <input class="form-control" type="date" name="drinkUntil" id="drinkUntil">
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="bottleSize">Bottle size (ml):</label>
-                <input class="form-control" type="number" name="bottleSize" id="bottleSize" placeholder="ml">
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='drinkUntil'>Best date limit to drink:</label>
+        <input class='form-control' type='date' name='drinkUntil' id='drinkUntil' />
+      </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='bottleSize'>Bottle size (ml):</label>
+        <input class='form-control' type='number' name='bottleSize' id='bottleSize' placeholder='ml' />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="closure">Closure:</label>
-                <input class="form-control" type="text" name="closure" id="closure">
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='closure'>Closure:</label>
+        <input class='form-control' type='text' name='closure' id='closure' />
+      </div>
 
-            <button class="btn btn-outline-danger" type="submit">Create Wine</button>
-            <a href="/cellars/{{cellarId}}/wines" class="btn btn-outline-warning float-end">Cancel</a>
+      <button class='btn btn-outline-danger' type='submit'>Create Wine</button>
+      <a href='/cellars/{{cellarId}}/wines' class='btn btn-outline-warning float-end'>Cancel</a>
 
-            {{#if errorMessage}}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{errorMessage}}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {{/if}}
-        </form>
-    </div>
+      {{#if errorMessage}}
+        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+          {{errorMessage}}
+          <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>
+      {{/if}}
+    </form>
+  </div>
 </div>
 
-<script type="text/javascript">
-    new SlimSelect({
-        select: document.getElementById('country-list')
-    });
-
-    function maxDate() {
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth()+1;
-        let yyyy = today.getFullYear();
-        dd = dd < 10 ? '0'+dd : dd;
-        mm = mm < 10 ? '0'+mm : mm;
-
-        today = `${yyyy}-${mm}-${dd}`;
-        let elemen = document.getElementById("drinkUntil");
-        elemen.setAttribute("min", today);
-    }
-
-    function maxYear() {
-        let today = new Date();
-        let year = today.getFullYear();
-        let elemen = document.getElementById('year');
-        elemen.setAttribute("max", year);
-    }
-
-    //avoid user to let wine type empty
-    document.getElementById('new-wine-form').addEventListener('submit', e => {
-        typeElem = e.target.elements.type;
-        nameElem = e.target.elements.name;
-
-        if(! typeElem.value) {
-            alert('You must choose a type for your wine!');
-            typeElem.focus();
-            e.preventDefault();
-            return;
-        }
-
-        if(! nameElem.value) {
-            alert('You must give a name to your wine!');
-            nameElem.focus();
-            e.preventDefault();
-            return;
-        }
-    });
-
-    maxYear();
-    maxDate();
+<script type='text/javascript'>
+  new SlimSelect({ select: document.getElementById('country-list') }); function maxDate() { let today = new Date(); let
+  dd = today.getDate(); let mm = today.getMonth()+1; let yyyy = today.getFullYear(); dd = dd < 10 ? '0'+dd : dd; mm = mm
+  < 10 ? '0'+mm : mm; today = `${yyyy}-${mm}-${dd}`; let elemen = document.getElementById("drinkUntil");
+  elemen.setAttribute("min", today); } function maxYear() { let today = new Date(); let year = today.getFullYear(); let
+  elemen = document.getElementById('year'); elemen.setAttribute("max", year); } //avoid user to let wine type empty
+  document.getElementById('new-wine-form').addEventListener('submit', e => { typeElem = e.target.elements.type; nameElem
+  = e.target.elements.name; if(! typeElem.value) { alert('You must choose a type for your wine!'); typeElem.focus();
+  e.preventDefault(); return; } if(! nameElem.value) { alert('You must give a name to your wine!'); nameElem.focus();
+  e.preventDefault(); return; } }); maxYear(); maxDate();
 </script>

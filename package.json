@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run scss && node ./bin/www",
     "dev": "DEBUG=module2-week3:* nodemon ./bin/www & npm run scss:watch",
-    "dev-windows": "nodemon ./bin/www & npm run scss:watch",
+    "dev-windows": "set DEBUG=module2-week3:* & nodemon ./bin/www & npm run scss:watch",
     "scss": "sass public/stylesheets/style.scss public/stylesheets/style.css",
     "scss:watch": "sass --watch public/stylesheets/style.scss public/stylesheets/style.css"
   },

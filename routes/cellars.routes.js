@@ -88,7 +88,7 @@ router.post('/cellars/:id/delete', requireLogin, async (req, res, next) => {
 
 //update cellar form
 router.get('/cellars/:id/edit', requireLogin, async (req, res, next) => {
-  errorMessage = req.session.errorMessage;
+  const errorMessage = req.session.errorMessage;
   if(errorMessage) {
     req.session.errorMessage = undefined;
   }

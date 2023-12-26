@@ -8,7 +8,7 @@
 
         <form class="mb-3" action="/cellars/{{cellarId}}/wines/add/info" method="POST">
             <div class="slim-select mb-3">
-                <label class="form-label" for="wine-list">Wine List:</label>
+                <label class="form-label shaded" for="wine-list">Wine List:</label>
                 <select name="wineId" id="wine-list">
                     <option selected value="" disabled>Select a wine to add</option>
                     {{#each wines}}

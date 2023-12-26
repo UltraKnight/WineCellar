@@ -1,37 +1,51 @@
-<div class="container-fluid container-general container-login">
-    <div class="col-md-4 offset-md-4 text-light">
-    <div class="text-center">
-        <h1 class="title" id="app-name">{{title}}</h1>
-        <h5 class="title">Welcome to {{title}}</h5>
+<div class='container-fluid container-general container-login'>
+  <div class='col-md-4 offset-md-4 text-light'>
+    <div class='text-center'>
+      <h1 class='title' id='app-name'>{{title}}</h1>
+      <h5 class='title'>Welcome to {{title}}</h5>
     </div>
 
-        <!-- The sign up page for the user -->
-         <h2>Register</h2>
-        <form action='/signup' method="POST">
-            <div class="mb-3">
-                <label class="form-label" for="username">Username</label>
-                <input class="form-control" type="text" name="username" id="username" placeholder="Insert username here" required>
-            </div>
+    <!-- The sign up page for the user -->
+    <h2>Register</h2>
+    <form action='/signup' method='POST'>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='username'>Username</label>
+        <input
+          class='form-control'
+          type='text'
+          name='username'
+          id='username'
+          placeholder='Insert username here'
+          required
+        />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="email">Email</label>
-                <input class="form-control" type="email" name="email" id="email" placeholder="Your email">
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='email'>Email</label>
+        <input class='form-control' type='email' name='email' id='email' placeholder='Your email' />
+      </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="password" name="password" id="password" placeholder="Your password" required>
-            </div>
+      <div class='mb-3'>
+        <label class='form-label shaded' for='password'>Password</label>
+        <input
+          class='form-control'
+          type='password'
+          name='password'
+          id='password'
+          placeholder='Your password'
+          required
+        />
+      </div>
 
-            <button class="btn btn-danger" type="submit">Create Account</button>
-            <span class="float-end">Already have an account? Login <a href="/" class="link-info">here</a></span>
+      <button class='btn btn-danger' type='submit'>Create Account</button>
+      <span class='float-end'>Already have an account? Login <a href='/' class='link-info'>here</a></span>
 
-            {{#if errorMessage}}
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{errorMessage}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {{/if}}
-        </form>
-    </div>
+      {{#if errorMessage}}
+        <div class='alert alert-danger alert-dismissible fade show' role='alert'>
+          {{errorMessage}}
+          <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+        </div>
+      {{/if}}
+    </form>
+  </div>
 </div>
