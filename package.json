@@ -3,9 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "DEBUG=module2-week3:* nodemon ./bin/www",
-    "dev-windows": "nodemon ./bin/www"
+    "start": "npm run scss && node ./bin/www",
+    "dev": "DEBUG=module2-week3:* nodemon ./bin/www & npm run scss:watch",
+    "dev-windows": "nodemon ./bin/www & npm run scss:watch",
+    "scss": "sass public/stylesheets/style.scss public/stylesheets/style.css",
+    "scss:watch": "sass --watch public/stylesheets/style.scss public/stylesheets/style.css"
+  },
+  "engines": {
+    "node": "21.5.0"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -23,8 +28,8 @@
     "morgan": "^1.9.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "node-sass-middleware": "^1.0.1",
     "nodemailer": "^6.4.18",
+    "sass": "^1.69.5",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
