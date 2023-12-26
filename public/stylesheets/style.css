@@ -1,5 +1,5 @@
 body {
-  padding-top: 50px;
+  padding-top: 45px;
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -162,7 +162,7 @@ textarea {
 /*test WineLoverMeter ends */
 @media only screen and (max-width: 767px) {
   body {
-    padding-top: 57px;
+    padding-top: 56px;
   }
   #app-name {
     font-size: 3rem;
