@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <div class='container-fluid container-general container-wine'>
   <div class='col-md-4 offset-md-4 text-light'>
     <div class='text-center'>
@@ -14,13 +16,13 @@
         <div>
           <label class='form-label shaded' for='country-list'>Country</label>
           <select name='country' id='country-list'>
-            {{#each countryList}}
-              {{#eq this 'Portugal'}}
-                <option value='{{this}}' selected>{{this}}</option>
-              {{else}}
-                <option value='{{this}}'>{{this}}</option>
-              {{/eq}}
-            {{/each}}
+            {% for country in countryList %}
+              {% if country === 'Portugal' %}
+                <option value='{{country}}' selected>{{country}}</option>
+              {% else %}
+                <option value='{{country}}'>{{country}}</option>
+              {% endif %}
+            {% endfor %}
           </select>
         </div>
       </div>
@@ -90,12 +92,12 @@
       <button class='btn btn-outline-danger' type='submit'>Create Wine</button>
       <a href='/cellars/{{cellarId}}/wines' class='btn btn-outline-warning float-end'>Cancel</a>
 
-      {{#if errorMessage}}
+      {% if errorMessage %}
         <div class='alert alert-danger alert-dismissible fade show' role='alert'>
           {{errorMessage}}
           <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
         </div>
-      {{/if}}
+      {% endif %}
     </form>
   </div>
 </div>
@@ -111,3 +113,4 @@
   e.preventDefault(); return; } if(! nameElem.value) { alert('You must give a name to your wine!'); nameElem.focus();
   e.preventDefault(); return; } }); maxYear(); maxDate();
 </script>
+{% endblock %}

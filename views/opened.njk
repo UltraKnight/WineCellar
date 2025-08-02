@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <script>
   function insertDate(date) {
     let dateFromDb = new Date(date);
@@ -21,14 +23,15 @@
     <div class="row">
         <div class="opened col-md-6 mt-4 text-light">
             <h4 class="mb-3">Memories</h4>
-            {{#each opened}}
-              <p class="fw-bold shaded">{{name}} - {{year}} - {{type}}</p>
-              <p class="shaded"><span class="fw-bold">Event:</span> {{event}}</p>
+            {% for item in opened %}
+              <p class="fw-bold shaded">{{item.name}} - {{item.year}} - {{item.type}}</p>
+              <p class="shaded"><span class="fw-bold">Event:</span> {{item.event}}</p>
               <script>
-                insertDate(`{{openingDate}}`);
+                insertDate(`{{item.openingDate}}`);
               </script>
               <hr>
-            {{/each}}
+            {% endfor %}
         </div>
     </div>
 </div>
+{% endblock %}

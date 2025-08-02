@@ -1,0 +1,27 @@
+{% extends "layout.njk" %}
+{% block content %}
+<h1>Wine List of This Cellar</h1>  <!-- change to {{cellar.id}} to have the name of the cellar on the page -->
+<hr>
+
+<a href="/cellars/{{cellar.id}}/wines/create">Create new</a>
+
+<!-- listar vinho e delete e edit-->
+
+{% for wine in cellar.wines %}  <!-- to have access to all the wines -->
+
+<div>
+    <a href="/cellars/{{cellar.id}}/wines/{{wine.id}}">{{wine.name}}</a> <!-- to show the name of wine -->
+
+   <!-- <a href="/cellars/:cellarId/wines/:wineId">See More</a> --> <!-- To go to details page of each -->
+
+
+    <a href="/cellars/{{cellar.id}}/wines/{{wine.id}}/edit">Edit</a>
+   
+
+    <form action="/cellars/{{cellar.id}}/wines/{{wine.id}}/delete" method="POST">
+        <button type="submit">Delete</button>
+    </form>
+</div>
+
+{% endfor %}
+{% endblock %}

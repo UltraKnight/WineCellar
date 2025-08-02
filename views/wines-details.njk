@@ -1,4 +1,6 @@
-{{!-- wine data -> name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure --}}
+{% extends "layout.njk" %}
+{% block content %}
+{# wine data -> name, country, year, annotations, type, blend, abv, drinkUntil, bottleSize, closure #}
 <div class="container-fluid container-general container-wine">
     <div class="row">
         <div class="col-md-6">
@@ -28,3 +30,4 @@
         </div>
     </div>
 </div>
+{% endblock %}

@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <div class="container-fluid container-general container-profile row m-0 p-0">
     <div class="col-md-2 col-lg-3 col-xl-2 pt-3 text-light">
         <div class="mb-3 text-center left-profile-menu">
@@ -7,21 +9,21 @@
             </button>
             <div class="collapse text-dark mt-2" id="collapseExample">
             <div class="card card-body p-0 m-0 text-start">
-                {{#if user.friends}}
-                    {{#each user.friends}}
+                {% if user.friends %}
+                    {% for friend in user.friends %}
                     <div class="d-flex align-items-center justify-content-between">
-                        <p class="m-1"><a href="/profile/{{username}}">{{username}}</a></p>
+                        <p class="m-1"><a href="/profile/{{friend.username}}">{{friend.username}}</a></p>
                         <form action="/profile/friend-delete" method="POST">
-                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="hidden" name="id" value="{{friend.id}}">
                             <button type="submit" class="btn bg-transparent p-0 m-0 btn-sm">
                                 <i class="bi-x" style="color: red; font-size: 1.5rem; line-height: 100%"></i>
                             </button>
                         </form>
                     </div>
-                    {{/each}}
-                {{else}}
+                    {% endfor %}
+                {% else %}
                     <p class="m-1">You have no friends.</p>
-                {{/if}}
+                {% endif %}
             </div>
             </div>
         </div>
@@ -33,21 +35,21 @@
             </button>
             <div class="collapse text-dark mt-2" id="collapseExample2">
                 <div class="card card-body p-0 m-0 text-start">
-                    {{#if sent}}
-                        {{#each sent}}
+                    {% if sent %}
+                        {% for item in sent %}
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="m-1">{{to}}</p>
+                            <p class="m-1">{{item.to}}</p>
                             <form action="/profile/request-delete" method="POST">
-                                <input type="hidden" name="id" value="{{id}}">
+                                <input type="hidden" name="id" value="{{item.id}}">
                                 <button type="submit" class="btn bg-transparent p-0 m-0 btn-sm">
                                     <i class="bi-x" style="color: red; font-size: 1.5rem; line-height: 100%"></i>
                                 </button>
                             </form>
                         </div>
-                        {{/each}}
-                    {{else}}
+                        {% endfor %}
+                    {% else %}
                         <p class="m-1">Nothing here.</p>
-                    {{/if}}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -59,29 +61,29 @@
             </button>
             <div class="collapse text-dark mt-2" id="collapseExample3">
                 <div class="card card-body p-0 m-0 text-start">
-                    {{#if received}}
-                        {{#each received}}
+                    {% if received %}
+                        {% for item in received %}
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="m-1">{{from}}</p>
+                            <p class="m-1">{{item.from}}</p>
                             <div class="d-flex">
                                 <form action="/profile/request-delete" method="POST" class="me-1">
-                                    <input type="hidden" name="id" value="{{id}}">
+                                    <input type="hidden" name="id" value="{{item.id}}">
                                     <button type="submit" class="btn bg-transparent p-0 m-0 btn-sm">
                                         <i class="bi-x" style="color: red; font-size: 1.5rem; line-height: 100%"></i>
                                     </button>
                                 </form>
                                 <form action="/profile/request-accept" method="POST">
-                                    <input type="hidden" name="id" value="{{id}}">
+                                    <input type="hidden" name="id" value="{{item.id}}">
                                     <button type="submit" class="btn bg-transparent p-0 m-0 btn-sm">
                                         <i class="bi-check" style="color: green; font-size: 1.5rem; line-height: 100%"></i>
                                     </button>
                                 </form>
                             </div>
                         </div>
-                        {{/each}}
-                    {{else}}
+                        {% endfor %}
+                    {% else %}
                         <p class="m-1">Nothing here.</p>
-                    {{/if}}
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -90,21 +92,21 @@
         <div class="text-center">
             <h1 class="title shaded" id="app-name">{{title}}</h1>
             <h3 class="title shaded mb-3">My Profile</h3>
-            {{#if message}}
+            {% if message %}
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{message}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            {{/if}}
+            {% endif %}
 
-            {{#if errorMessage}}
+            {% if errorMessage %}
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 {{errorMessage}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            {{/if}}
+            {% endif %}
 
-            {{#if achievement}}
+            {% if achievement %}
             <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading d-inline">Well done!</h4>
                 <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -117,7 +119,7 @@
                     achieveSound.play();
                 }
             </script>
-            {{/if}}
+            {% endif %}
         </div>
 
         <!-- Profile pic cloudinary -->
@@ -127,7 +129,7 @@
             </div>
             <div class="flex-grow-1">
                 <form class="mb-3" action="/profile/{{user._id}}/new-username" method="POST">
-                    {{!-- <label class="form-label shaded" for="username">Username</label> --}}
+                    {# <label class="form-label shaded" for="username">Username</label> #}
                     <div class="mb-3">
                         <label for="username" class="form-label shaded">Username</label>
                         <input class="form-control" type="text" name="username" id="username" value="{{user.username}}">
@@ -202,14 +204,13 @@
             <label class="form-label wine-lover-list shaded" for="wine-lover-list">WineLover Meter:</label>
             <select id="wine-lover-list" name="wineLoverMeter" class="form-select">
                 <option selected disabled>Open to choose</option>
-                {{#each wineLoverMeterOptions}}
-                    {{#eq ../user.wineLoverMeter this}}
-                        <option value="{{this}}" selected>{{this}}</option>
-                    {{else}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/eq}}
-                {{/each}}
-              
+                {% for option in wineLoverMeterOptions %}
+                    {% if user.wineLoverMeter === option %}
+                    <option value="{{option}}" selected>{{option}}</option>
+                    {% else %}
+                    <option value="{{option}}">{{option}}</option>
+                    {% endif %}
+                {% endfor %}
             </select>
         </div>
         <button id="btn-delete-username" class="btn btn-danger btn-sm" type="submit">Choose</button>
@@ -239,3 +240,4 @@
     document.getElementsByName('porto')[0].checked = {{user.porto}};
 //wine lover metter select
 </script>
+{% endblock %}

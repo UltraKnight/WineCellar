@@ -175,14 +175,23 @@ router.post('/profile/delete', requireLogin, async (req, res, next) => {
 /* to test cloudinary */
 //add profile photo
 
-router.post('/profile/update-profile-pic', requireLogin, fileUpload.single('image'), async (req, res) => {
+router.post('/profile/update-profile-pic', requireLogin, async (req, res) => {
   //pass middleware . The 'image' on sigle comes from the input image on "FIND PLACE"
   if(! req.file) {
     res.redirect('/profile');
     return;
   }
 
-  const fileUrlOnCloudinary = req.file.path;
+  const uploadedFile = req.files.file;
+  const result = await fileUpload.uploader.upload(uploadedFile.tempFilePath, {
+    folder: 'winekeeper',
+    allowed_formats: ['jpg', 'png']
+  });
+
+  // delete the temp file
+  fs.unlinkSync(uploadedFile.tempFilePath);
+
+  const fileUrlOnCloudinary = result.secure_url;
   //first upload image from cloudinary with the name from the form
   
   try {

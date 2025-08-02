@@ -1,6 +1,8 @@
+{% extends "layout.njk" %}
+{% block content %}
 <div class="container-fluid container-general container-cellar p-0">
   <div class="table-responsive-sm cellars p-3">
-    {{#if achievement}}
+    {% if achievement %}
       <div class="alert alert-success" role="alert">
         <h4 class="alert-heading d-inline">Well done!</h4>
         <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -14,7 +16,7 @@
       <script>
         if(achieveSound) { achieveSound.play(); }
       </script>
-    {{/if}}
+    {% endif %}
 
     <p class="fs-2 text-center mb-1">My Wine Cellars</p>
     <table class="table table-dark text-light table-borderless" style="--bs-table-bg: transparent">
@@ -25,25 +27,26 @@
         <th>Capacity</th>
         <th class="text-start" colspan="2">Managing</th>
       </tr>
-      {{#each cellars}}
+      {% for cellar in cellars %}
         <tr class="text-light align-middle fs-6">
-          <td class="fw-bold"><a href="/cellars/{{id}}/wines">Enter the
-              {{name}}</a></td>
-          <td>{{place}}</td>
-          <td>{{capacity}}</td>
+          <td class="fw-bold"><a href="/cellars/{{cellar.id}}/wines">Enter the
+              {{cellar.name}}</a></td>
+          <td>{{cellar.place}}</td>
+          <td>{{cellar.capacity}}</td>
 
           <td>
-            <a href="/cellars/{{id}}/edit">Edit {{name}}</a>
+            <a href="/cellars/{{cellar.id}}/edit">Edit {{cellar.name}}</a>
           </td>
 
           <td>
-            <form action="/cellars/{{id}}/delete" method="POST">
+            <form action="/cellars/{{cellar.id}}/delete" method="POST">
               <button type="submit" class="btn btn-sm btn-danger">Delete</button>
             </form>
           </td>
         </tr>
-      {{/each}}
+      {% endfor %}
     </table>
     <p class="fs-5" colspan="4"><a href="/cellars/create">New Cellar</a></p>
   </div>
 </div>
+{% endblock %}

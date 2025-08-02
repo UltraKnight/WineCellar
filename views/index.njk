@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <div class="container-fluid container-general container-login">
   <div class="col-md-4 offset-md-4 text-light">
     <div class="text-center">
@@ -5,7 +7,7 @@
       <h5 class="title">Welcome to {{title}}</h5>
     </div>
 
-    {{#unless session.currentUser}}
+    {% if not session.currentUser %}
       <h2>Login</h2>
 
       <form action="/login" method="POST">
@@ -22,17 +24,17 @@
         <button type="submit" class="btn btn-danger">Log In</button>
         <span class="float-end">Don't have an account? Sign up <a href="/signup" class="link-info">here</a></span>
       </form>
-    {{/unless}}
+    {% endif %}
 
-    {{#if errorMessage}}
-      {{!-- <div>{{errorMessage}}</div> --}}
+    {% if errorMessage %}
+      {# <div>{{errorMessage}}</div> #}
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
         {{errorMessage}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-    {{/if}}
+    {% endif %}
 
-    {{#if achievement}}
+    {% if achievement %}
       <div class="alert alert-success" role="alert">
         <h4 class="alert-heading d-inline">Well done!</h4>
         <button type="button" class="btn-close float-end" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -45,6 +47,7 @@
           achieveSound.play();
         }
       </script>
-    {{/if}}
+    {% endif %}
   </div>
 </div>
+{% endblock %}

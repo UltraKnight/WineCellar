@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <div class="container-fluid container-general container-cellar">
     <div class="col-md-4 offset-md-4 text-light">
         <div class="text-center">
@@ -26,12 +28,13 @@
             <button class="btn btn-danger" type="submit">Update this Cellar</button>
             <a href="/cellars" class="btn btn-warning float-end">Cancel</a>
 
-            {{#if errorMessage}}
+            {% if errorMessage %}
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     {{errorMessage}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            {{/if}}
+            {% endif %}
         </form>
     </div>
 </div>
+{% endblock %}

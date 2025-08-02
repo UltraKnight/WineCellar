@@ -1,3 +1,5 @@
+{% extends "layout.njk" %}
+{% block content %}
 <div class="container-fluid container-general container-wine">
     <div class="col-md-4 offset-md-4 text-light">
         <div class="text-center">
@@ -11,16 +13,16 @@
                 <label class="form-label shaded" for="wine-list">Wine List:</label>
                 <select name="wineId" id="wine-list">
                     <option selected value="" disabled>Select a wine to add</option>
-                    {{#each wines}}
-                        <option value="{{id}}">{{this.year}} - {{name}} - {{type}} - creator {{createdBy.username}}</option>
-                    {{/each}}
+                    {% for wine in wines %}
+                        <option value="{{wine.id}}">{{wine.year}} - {{wine.name}} - {{wine.type}} - creator {{wine.createdBy.username}}</option>
+                    {% endfor %}
                 </select>
             </div>
 
             <button class="btn btn-info" type="submit">See wine information</button>
         </form>
 
-        {{#if selectedWine}}
+        {% if selectedWine %}
             <div class="mb-3 shaded">
                 <h6>Name: {{selectedWine.name}}</h6>
                 <hr>
@@ -45,7 +47,7 @@
 
                 <button class="btn btn-danger" type="submit">Add {{selectedWine.name}}</button>
             </form>
-        {{/if}}
+        {% endif %}
     </div>
 </div>
 
@@ -55,3 +57,4 @@
         select: document.getElementById('wine-list')
     });
 </script>
+{% endblock %}

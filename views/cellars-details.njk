@@ -1,0 +1,14 @@
+{% extends "layout.njk" %}
+{% block content %}
+<h1>{{cellar.name}}</h1>
+<hr>
+
+<h3>Wines in this cellar</h3>
+<ul>
+  {% for wine in cellar.wines %}
+    <li>Wine name: {{wine.name}}</li>
+  {% endfor %}
+</ul>
+<p>This wine is placed at: {{cellar.place}}</p>
+<p>This cellar capacity is: {{cellar.capacity}}</p>
+{% endblock %}

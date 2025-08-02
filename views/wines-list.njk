@@ -1,6 +1,7 @@
-
+{% extends "layout.njk" %}
+{% block content %}
 <div class="container-fluid container-general container-wine">
-    {{#if achievement}}
+    {% if achievement %}
     <div class="col-md-6 offset-md-3">
       <div class="alert alert-success" role="alert">
           <h4 class="alert-heading d-inline">Well done!</h4>
@@ -12,37 +13,37 @@
     </div>
     <script>
       if(achieveSound) {
-          achieveSound.play();
+        achieveSound.play();
       }
     </script>
-    {{/if}}
+    {% endif %}
     <div id="grid-container" class="pt-3 m-auto">
-        {{#each cellar.wines}}
+        {% for wine in cellar.wines %}
             <div class="wine-container filled">
-            <!--    <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add"></a>
+            {# <a class="plus-icon" href="/cellars/{{../cellar.id}}/wines/add"></a>
                         <i class="bi-plus-square" style="font-size: 1.2rem; color:maroon"></i>
-                </a> -->
-                <a class="shaded top-centered" href="/cellars/{{../cellar.id}}/wines/{{id}}">
-                    <p>{{name}}</p>
+                </a> #}
+                <a class="shaded top-centered" href="/cellars/{{cellar.id}}/wines/{{wine.id}}">
+                    <p>{{wine.name}}</p>
                 </a>
 
                 <img src="/images/top_view_bottle.png" height="100px" width="100px">
-                <a class="open-link" href="" {{!--href="/cellar/{{../cellar.id}}/wines/{{id}}/open"--}}
-                data-bs-toggle="modal" data-bs-target="#openWineModal" data-bs-wine="{{this.name}}"
-                data-bs-type="{{type}}" data-bs-year="{{year}}" data-bs-id="{{id}}">Open</a>
-                {{!-- you can only edit or delete a wine if you created it --}}
-                {{#ifEq createdBy ../session.currentUser._id}}
-                  <a class="edit-icon" href="/cellars/{{../cellar.id}}/wines/{{id}}/edit">
+                <a class="open-link" href=""
+                data-bs-toggle="modal" data-bs-target="#openWineModal" data-bs-wine="{{wine.name}}"
+                data-bs-type="{{wine.type}}" data-bs-year="{{wine.year}}" data-bs-id="{{wine.id}}">Open</a>
+                {# you can only edit or delete a wine if you created it #}
+                {% if createdBy === session.currentUser._id %}
+                  <a class="edit-icon" href="/cellars/{{cellar.id}}/wines/{{wine.id}}/edit">
                       <i class="bi-pencil-square" style="font-size: 1.2rem; color: lightgreen;"></i>
                   </a>
-                {{/ifEq}}
-                  <form class="background-light" action="/cellars/{{../cellar.id}}/wines/{{id}}/delete" method="POST">
+                {% endif %}
+                  <form class="background-light" action="/cellars/{{cellar.id}}/wines/{{wine.id}}/delete" method="POST">
                       <button class="delete-icon border-0 bg-transparent">
                           <i class="bi-trash" style="font-size: 1.2rem; color: red;"></i>
                       </button>
                   </form>
             </div> 
-        {{/each}}
+        {% endfor %}
     </div>
 </div>
 
@@ -121,3 +122,4 @@
             openModal.querySelector('.form').reset();
         });
 </script>
+{% endblock %}
